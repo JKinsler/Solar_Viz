@@ -12,6 +12,30 @@ db = SQLAlchemy()
 ##############################################################################
 # Model definitions
 
+class Company(db.Model):
+    """Information about companies.
+    """
+
+    __tablename__ = "companies"
+
+    company_id = db.Column(db.Integer, autoincrement=True, primary_key=True, 
+                    nullable=False)
+    name = db.Column(db.String(64), nullable=False)
+    company_type = db.Column(db.String(64), nullable=False)
+    
+    """table relationships """
+    consumption = db.relationship('Consumption', backref='consumptions')
+    # additional relationship to Company in Program class
+    
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return f"""<Company company_id={self.company_id}
+                   name={self.name}
+                   company_type={self.company_type}>"""
+
+
 class Program(db.Model):
     """Information per solar project applications.
 
@@ -22,73 +46,102 @@ class Program(db.Model):
     __tablename__ = "programs"
 
     application_id = db.Column(db.String(25), primary_key=True, nullable=False)
-    admin = db.Column(db.Column(db.Integer,
-                         db.ForeignKey('companies.company_id')))
+    admin = db.Column(db.Integer,
+                         db.ForeignKey('companies.company_id'))
     city = db.Column(db.String(64), nullable=False)
     county = db.Column(db.String(64), nullable=False)
     zipcode = db.Column(db.String(5), nullable=False)
-    contractor = db.Column(db.Column(db.Integer,
-                         db.ForeignKey('companies.company_id'))) 
-    pv_manuf = db.Column(db.Column(db.Integer,
-                         db.ForeignKey('companies.company_id'))) 
-    invert_manuf = db.Column(db.Column(db.Integer,
-                         db.ForeignKey('companies.company_id'))) 
+    contractor = db.Column(db.Integer, 
+                        db.ForeignKey('companies.company_id')) #should I add nullable = True?
+    pv_manuf = db.Column(db.Integer,
+                         db.ForeignKey('companies.company_id')) #should I add nullable = True?
+    invert_manuf = db.Column(db.Integer,
+                         db.ForeignKey('companies.company_id')) #should I add nullable = True?
     status = db.Column(db.String(64), nullable=True)
 
-    #ADD RELATIONSHIP DESCRIPTORS HERE
+    """table relationships"""
+    company = db.relationship('Company', backref='companies')
+    production = db.relationship('Production', backref='productions')
 
-    #ADD REPR HERE
-
-
-class Company(db.Model):
-    """Information about companies.
-    """
-
-    __tablename__ = "companies"
-
-    company_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
-    name = db.Column(db.String(64), nullable=False)
-    company_type = db.Column(db.String(64), nullable=False)
     
-    #ADD RELATIONSHIP DESCRIPTORS HERE
+    def __repr__(self):
+        """Provide helpful representation when printed."""
 
-    #ADD REPR here
+        return f"""<Program application_id={self.application_id}
+                   admin={self.admin}
+                   city={self.city}
+                   county={self.county}
+                   zipcode={self.zipcode}
+                   contractor={self.contractor}
+                   pv_manuf={self.pv_manuf}
+                   invert_manuf={self.invert_manuf}
+                   status={self.status}>"""
 
 
 class Production(db.Model):
     """Information about solar energy production per appliction number.
 
-    - amount unit values will be in kWh.
+    - 'produced' unit values will be in kWh.
     """
 
     __tablename__ = "productions"
 
     production_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
-    application_id = db.Column(db.Column(db.Integer,
-                         db.ForeignKey('programs.application_id')))
+    application_id = db.Column(db.Integer,
+                         db.ForeignKey('programs.application_id'))
     energy_type = db.Column(db.String(64), nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
     produced = db.Column(db.Integer, nullable=False) 
 
-    #ADD RELATIONSHIP DESCRIPTORS HERE
+    """table relationships"""
+    # additional relationship to Production in Program class
+    
     #ADD REPR here
 
 
 class Consumption(db.Model):
-    """Information about solar energy production per appliction number.
+    """Information about total energy consumption accounted for per utility.
 
-    - amount unit values will be in kWh. 
-    #WHEN SEEDING, NEED TO CONVERT FROM KWH
+    'consumed' unit values will be in kWh. 
+    
+    #WHEN SEEDING, NEED TO CONVERT FROM gWh
     """
 
     __tablename__ = "consumptions"
 
     consumption_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
-    utility = db.Column(db.Column(db.Integer,
-                         db.ForeignKey('companies.company_id')))
+    utility = db.Column(db.Integer,
+                         db.ForeignKey('companies.company_id'))
     year = db.Column(db.String(10), nullable=False)
     consumed = db.Column(db.Integer, nullable=False) 
 
-    #ADD RELATIONSHIP DESCRIPTORS HERE
+    """add table relationships here"""
+
+    #relatinship to Consumption in Company class
+    
     #ADD REPR here
+
+
+    ##############################################################################
+# Helper functions
+"""Took helper functions from ratings lab. Need to understand this code 
+better."""
+
+def connect_to_db(app):
+    """Connect the database to our Flask app."""
+
+    # Configure to use our PstgreSQL database
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///ratings'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+
+
+if __name__ == "__main__":
+    # As a convenience, if we run this module interactively, it will leave
+    # you in a state of being able to work with the database directly.
+
+    from server import app
+    connect_to_db(app)
+    print("Connected to DB.")

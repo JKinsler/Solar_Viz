@@ -125,13 +125,19 @@ class Consumption(db.Model):
     consumed = db.Column(db.Integer, nullable=False) 
 
     """add table relationships here"""
-
-    #relatinship to Consumption in Company class
+    #additional relatinship to Consumption in Company class
     
-    #ADD REPR here
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return f"""<Consumption consumption_id={self.consumption_id}
+                   utility={self.utility}
+                   year={self.year}
+                   consumed={self.consumed}>"""
 
 
-    ##############################################################################
+###############################################################################
 # Helper functions
 """Took helper functions from ratings lab. Need to understand this code 
 better."""

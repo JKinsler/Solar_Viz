@@ -87,7 +87,7 @@ class Production(db.Model):
     __tablename__ = "productions"
 
     production_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
-    application_id = db.Column(db.Integer,
+    application_id = db.Column(db.String(25),
                          db.ForeignKey('programs.application_id'))
     energy_type = db.Column(db.String(64), nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
@@ -146,7 +146,7 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PstgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///ratings'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)

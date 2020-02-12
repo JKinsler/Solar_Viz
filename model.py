@@ -91,13 +91,21 @@ class Production(db.Model):
                          db.ForeignKey('programs.application_id'))
     energy_type = db.Column(db.String(64), nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
-    start_date = db.Column(db.DateTime, nullable=False)
+    end_date = db.Column(db.DateTime, nullable=False)
     produced = db.Column(db.Integer, nullable=False) 
 
     """table relationships"""
     # additional relationship to Production in Program class
-    
-    #ADD REPR here
+
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return f"""<Production application_id={self.application_id}
+                   energy_type={self.energy_type}
+                   start_date={self.start_date}
+                   end_date={self.end_date}
+                   produced={self.produced}>"""
 
 
 class Consumption(db.Model):

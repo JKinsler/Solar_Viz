@@ -29,7 +29,14 @@ VALUES('SD-CSI-00001', 3, 'San Diego', 'San Diego', '92121', 4, 5, 6);
 INSERT into productions (application_id, energy_type, start_date, end_date, produced)
 VALUES('SD-CSI-00001', 'solar', '5/1/2007', '5/31/2007', 36578);
 
+INSERT into consumptions (utility, year, consumed)
+VALUES(3, 2007, 20686);
 
+INSERT into consumptions (utility, year, consumed)
+VALUES(3, 2008, 20324);
+
+INSERT into consumptions (utility, year, consumed)
+VALUES(1, 2007, 86078);
 
 ______________________"""table data and queries""" ______________________________
 use these in psql:

@@ -114,7 +114,8 @@ class Production(db.Model):
 class Consumption(db.Model):
     """Information about total energy consumption accounted for per utility.
 
-    'consumed' unit values will be in kWh. 
+    'consumed' unit values will be in gWh. IF CHANGING THE unit to kwh, then use 
+     long-int python format.
     
     #WHEN SEEDING, NEED TO CONVERT FROM gWh
     """

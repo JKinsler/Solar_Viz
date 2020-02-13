@@ -60,10 +60,10 @@ class Program(db.Model):
     status = db.Column(db.String(64), nullable=True)
 
     """table relationships"""
-    utility_company = db.relationship('Company', foreign_keys=[utility], backref='programs')
-    contractor_company = db.relationship('Company', foreign_keys=[contractor], backref='programs')
-    pv_manuf_company = db.relationship('Company', foreign_keys=[pv_manuf], backref='programs')
-    invert_manuf_company = db.relationship('Company', foreign_keys=[invert_manuf], backref='programs')
+    utility_company = db.relationship('Company', foreign_keys="[Program.utility]", backref='programs_utility')
+    contractor_company = db.relationship('Company', foreign_keys="[Program.contractor]", backref='programs_contractor')
+    pv_manuf_company = db.relationship('Company', foreign_keys="[Program.pv_manuf]", backref='pv_programs')
+    invert_manuf_company = db.relationship('Company', foreign_keys="[Program.invert_manuf]", backref='invert_programs')
     productions = db.relationship('Production', backref='program')
 
     

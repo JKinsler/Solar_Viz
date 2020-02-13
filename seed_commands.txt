@@ -5,18 +5,30 @@ cd src/project/hbp_jk/
 ___________"""Comands for manually populating the data tables"""_________________
 Use these in psql:
 
-INSERT into productions (application_id, energy_type, start_date, end_date, produced)
-VALUES('SD-CSI-00001', 'solar', '5/1/2007', '5/31/2007', 36578);
+INSERT into companies (name, company_type)
+VALUES('Pacific Gas and Electric', 'energy utility');
+
+INSERT into companies (name, company_type)
+VALUES('Southern California Edison Company', 'energy utility');
+
+INSERT into companies (name, company_type)
+VALUES('San Diego Gas and Electric', 'energy utility');
+
+INSERT into companies (name, company_type)
+VALUES('SPG Solar', 'solar contractor');
+
+INSERT into companies (name, company_type)
+VALUES('Kyocera Solar', 'photovoltaics manufacturer');
+
+INSERT into companies (name, company_type)
+VALUES('Xantrex', 'inverter manufacturer');
 
 INSERT into programs (application_id, utility, city, county, zipcode, contractor, pv_manuf, invert_manuf)
 VALUES('SD-CSI-00001', 3, 'San Diego', 'San Diego', '92121', 4, 5, 6);
 
-Insert into companies (name, company_type)                                                        VALUES('Xantrex Technology', 'inverter manufacturer')
-;
+INSERT into productions (application_id, energy_type, start_date, end_date, produced)
+VALUES('SD-CSI-00001', 'solar', '5/1/2007', '5/31/2007', 36578);
 
-Insert into companies (name, company_type)
-VALUES('Kyocera Solar', 'photovoltaics manufacturer)
-;
 
 
 ______________________"""table data and queries""" ______________________________

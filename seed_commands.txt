@@ -1,0 +1,65 @@
+cd src/project/hbp_jk/
+
+
+
+___________"""Comands for manually populating the data tables"""_________________
+Use these in psql:
+
+INSERT into productions (application_id, energy_type, start_date, end_date, produced)
+VALUES('SD-CSI-00001', 'solar', '5/1/2007', '5/31/2007', 36578);
+
+INSERT into programs (application_id, utility, city, county, zipcode, contractor, pv_manuf, invert_manuf)
+VALUES('SD-CSI-00001', 3, 'San Diego', 'San Diego', '92121', 4, 5, 6);
+
+Insert into companies (name, company_type)                                                        VALUES('Xantrex Technology', 'inverter manufacturer')
+;
+
+Insert into companies (name, company_type)
+VALUES('Kyocera Solar', 'photovoltaics manufacturer)
+;
+
+
+______________________"""table data and queries""" ______________________________
+use these in psql:
+
+COMPANIES TABLE DATA
+
+solar_viz=# SELECT * from companies
+solar_viz-# ;
+ company_id |                name                |        company_type
+------------+------------------------------------+----------------------------
+          1 | Pacific Gas and Electric           | energy utility
+          2 | Southern California Edison Company | energy utility
+          3 | San Diego Gas and Electric Company | energy utility
+          4 | SPG Solar                          | solar contractor
+          5 | Kyocera Solar                      | photovoltaics manufacturer
+          6 | Xantrex Technology                 | inverter manufacturer
+(6 rows)
+
+
+PRODUCTIONS TABLE DATA
+
+solar_viz=# SELECT * from productions
+solar_viz-# ;
+ production_id | application_id | energy_type |     start_date      |      end_date       | produced
+---------------+----------------+-------------+---------------------+---------------------+----------
+             1 | SD-CSI-00001   | solar       | 2007-05-01 00:00:00 | 2007-05-31 00:00:00 |    36578
+(1 row)
+
+
+PROGRAMS TABLE DATA
+
+solar_viz=# SELECT * from programs
+;
+ application_id | admin |   city    |  county   | zipcode | contractor | pv_manuf | invert_manuf | status
+----------------+-------+-----------+-----------+---------+------------+----------+--------------+--------
+ SD-CSI-00001   |     3 | San Diego | San Diego | 92121   |          4 |        5 |            6 |
+(1 row)
+
+________________"""creating, dumping, and storing databases"""__________________
+use these in terminal
+
+(env) $ createdb solar_viz            # creates the database
+>>> db.create_all()             # create the database tables from classes in model.py -i
+env) $ dropdb solar_vis                # deletes the database
+env) $ pg.dump solar_viz > solar.sql   # stores the database in a sql file called 'solar'

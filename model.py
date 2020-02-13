@@ -24,8 +24,8 @@ class Company(db.Model):
     company_type = db.Column(db.String(64), nullable=False)
     
     """table relationships """
-    consumption = db.relationship('Consumption', backref='consumptions')
-    # additional relationship to Company in Program class
+    consumptions = db.relationship('Consumption', backref='company')
+    # additional relationships in Program class
     
 
     def __repr__(self):
@@ -46,29 +46,32 @@ class Program(db.Model):
     __tablename__ = "programs"
 
     application_id = db.Column(db.String(25), primary_key=True, nullable=False)
-    admin = db.Column(db.Integer,
-                         db.ForeignKey('companies.company_id'))
+    utility = db.Column(db.Integer,
+                         db.ForeignKey('companies.company_id'), nullable=False) #energy producers
     city = db.Column(db.String(64), nullable=False)
     county = db.Column(db.String(64), nullable=False)
     zipcode = db.Column(db.String(5), nullable=False)
     contractor = db.Column(db.Integer, 
-                        db.ForeignKey('companies.company_id')) #should I add nullable = True?
+                        db.ForeignKey('companies.company_id'), nullable=True)
     pv_manuf = db.Column(db.Integer,
-                         db.ForeignKey('companies.company_id')) #should I add nullable = True?
+                         db.ForeignKey('companies.company_id'), nullable=True) 
     invert_manuf = db.Column(db.Integer,
-                         db.ForeignKey('companies.company_id')) #should I add nullable = True?
+                         db.ForeignKey('companies.company_id'), nullable=True)
     status = db.Column(db.String(64), nullable=True)
 
     """table relationships"""
-    company = db.relationship('Company', backref='companies')
-    production = db.relationship('Production', backref='productions')
+    utility_company = db.relationship('Company', foreign_keys=[utility], backref='programs')
+    contractor_company = db.relationship('Company', foreign_keys=[contractor], backref='programs')
+    pv_manuf_company = db.relationship('Company', foreign_keys=[pv_manuf], backref='programs')
+    invert_manuf_company = db.relationship('Company', foreign_keys=[invert_manuf], backref='programs')
+    productions = db.relationship('Production', backref='program')
 
     
     def __repr__(self):
         """Provide helpful representation when printed."""
 
         return f"""<Program application_id={self.application_id}
-                   admin={self.admin}
+                   utility={self.utility}
                    city={self.city}
                    county={self.county}
                    zipcode={self.zipcode}

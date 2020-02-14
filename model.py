@@ -25,8 +25,13 @@ class Company(db.Model):
     
     """table relationships """
     consumptions = db.relationship('Consumption', backref='company')
-    productions = db.relationship('Production', backref='company')
     # additional relationships in Program class
+
+    # productions = db.relationship('Production', backref='company') 
+    """ The above line causes an error because there is no direct relationship between 
+    Company and Production."""
+
+    
     
 
     def __repr__(self):

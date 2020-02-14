@@ -66,10 +66,13 @@ class Program(db.Model):
     status = db.Column(db.String(64), nullable=True)
 
     """table relationships"""
+    #relationship to the Company class
     utility_company = db.relationship('Company', foreign_keys="[Program.utility]", backref='programs_utility')
     contractor_company = db.relationship('Company', foreign_keys="[Program.contractor]", backref='programs_contractor')
     pv_manuf_company = db.relationship('Company', foreign_keys="[Program.pv_manuf]", backref='pv_programs')
     invert_manuf_company = db.relationship('Company', foreign_keys="[Program.invert_manuf]", backref='invert_programs')
+    
+    #relationship to the Program class
     productions = db.relationship('Production', backref='program')
 
     

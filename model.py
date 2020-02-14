@@ -25,6 +25,7 @@ class Company(db.Model):
     
     """table relationships """
     consumptions = db.relationship('Consumption', backref='company')
+    productions = db.relationship('Production', backref='company')
     # additional relationships in Program class
     
 
@@ -95,7 +96,7 @@ class Production(db.Model):
     energy_type = db.Column(db.String(64), nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
-    produced = db.Column(db.Integer, nullable=False) 
+    produced = db.Column(db.BigInteger, nullable=False) 
 
     """table relationships"""
     # additional relationship to Production in Program class
@@ -115,7 +116,7 @@ class Consumption(db.Model):
     """Information about total energy consumption accounted for per utility.
 
     'consumed' unit values will be in gWh. IF CHANGING THE unit to kwh, then use 
-     long-int python format.
+     bignum, a long integer python format.
     
     #WHEN SEEDING, NEED TO CONVERT FROM gWh
     """
@@ -126,7 +127,7 @@ class Consumption(db.Model):
     utility = db.Column(db.Integer,
                          db.ForeignKey('companies.company_id'))
     year = db.Column(db.String(10), nullable=False)
-    consumed = db.Column(db.Integer, nullable=False) 
+    consumed = db.Column(db.BigInteger, nullable=False) 
 
     """add table relationships here"""
     #additional relatinship to Consumption in Company class

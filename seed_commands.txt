@@ -30,13 +30,13 @@ INSERT into productions (application_id, energy_type, start_date, end_date, prod
 VALUES('SD-CSI-00001', 'solar', '5/1/2007', '5/31/2007', 36578);
 
 INSERT into consumptions (utility, year, consumed)
-VALUES(3, 2007, 20686);
+VALUES(3, 2007, 20686000000);
 
 INSERT into consumptions (utility, year, consumed)
-VALUES(3, 2008, 20324);
+VALUES(3, 2008, 20324000000);
 
 INSERT into consumptions (utility, year, consumed)
-VALUES(1, 2007, 86078);
+VALUES(1, 2007, 86078000000);
 
 ______________________"""table data and queries""" ______________________________
 use these in psql:

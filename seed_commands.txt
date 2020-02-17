@@ -26,7 +26,7 @@ VALUES('Xantrex', 'inverter manufacturer');
 INSERT into programs (application_id, utility, city, county, zipcode, contractor, pv_manuf, invert_manuf)
 VALUES('SD-CSI-00001', 3, 'San Diego', 'San Diego', '92121', 4, 5, 6);
 
-INSERT into productions (application_id, energy_type, start_date, end_date, produced)
+INSERT into productions (application_id, energy_type, end_date, produced)
 VALUES('SD-CSI-00001', 'solar', '5/1/2007', '5/31/2007', 36578);
 
 INSERT into consumptions (utility, year, consumed)
@@ -82,3 +82,4 @@ use these in terminal
 >>> db.create_all()             # create the database tables from classes in model.py -i
 env) $ dropdb solar_vis                # deletes the database
 env) $ pg.dump solar_viz > solar.sql   # stores the database in a sql file called 'solar'
+env) $ psql solar_viz                  # view the database in psql

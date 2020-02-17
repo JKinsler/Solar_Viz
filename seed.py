@@ -14,6 +14,26 @@ from server import app
 #     """Load companies information from seed file into the database.
 #     non-working code."""
 
+"""PSEUDO CODE
+use the 'programs_test_csv.csv' as the seed data file
+look at columns for: 
+- application number
+- solar contractor
+- pv_manufacturer
+- invert_manufacturer
+
+ways to move forward:
+1. first alternative: make a dictionary
+check if the company name is in the dictionary
+if the company is in the dictionary then skip
+if the company is not in the dictionary then add
+
+2. second alternative: work directly with the database
+check if the company name is already in the database
+if it's in the database then skip
+if it's not in the database then add
+
+"""
 #     print("Company")
 
 #programs#####################################
@@ -28,7 +48,8 @@ from server import app
 
 def load_productions():
     """Load production information from seed file into the database.
-    non-working code"""
+    NON-WORKING CODE
+    need to add foreign key values (application_id) to programs table before this will run"""
 
     print("Productions")
 
@@ -38,20 +59,31 @@ def load_productions():
         row = row.split(",")
         #print(row)
 
-        application_id, _, _, _, _, _, _, _, _, _, end_date, produced = row
+        application_id, _, _, _, _, _, _, _, _, _, end_date_initial, produced = row
         # print(application_id)
         # print(end_date)
         # print(produced)
+        
+        #skip the header row
+        if application_id != "Application Number":
+            
+            #format the received end_date_initial to correspond with datetime:
+            end_date_format = "%m/%d/%Y"
+            end_date = datetime.strptime(end_date_initial, end_date_format)
+            print(end_date)
 
-        # user = User(user_id=user_id,
-        #             age=age,
-        #             zipcode=zipcode)
+            production = Production(application_id=application_id,
+                            energy_type = 'solar',
+                            end_date=end_date,
+                            produced=produced,
+                            )
+            print(production)
 
-        # We need to add to the session or it won't ever be stored
-        # db.session.add(user)
+            # Add to the session to the database
+            db.session.add(production)
 
-    # # Once we're done, we should commit our work
-    # db.session.commit()
+    # Commit our work so it saves to the database
+    db.session.commit()
 
 #consumptions######################################
 # def load_consumptions():
@@ -71,8 +103,8 @@ if __name__ == "__main__":
     # db.create_all()
 
     # Import different types of data
-    #   UPDATE TO THE CORRECT FUNCTION NAMES
-    # load_users()
-    # load_movies()
-    # load_ratings()
-    # set_val_user_id()
+    #   UNCOMMENT WHEN SEED.PY IS COMPLETE
+    # load_companies()
+    # load_programs()
+    load_productions()
+    # load_consumptions()

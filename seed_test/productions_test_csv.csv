@@ -1,0 +1,28 @@
+Application Number,Program Administrator,Program,Total Cost,System Owner Sector,Host Customer Sector,Host Customer Physical Address City,Host Customer Physical Address County,Host Customer Physical Address Zip Code,PBI Payment #,Production Period End Date,Period kWh Production
+SD-CSI-00001,CSE,Large Commercial (>= 10 kW),1536639.6,Commercial,Commercial,San Diego,San Diego,92121,1,5/31/2007,36578
+SD-CSI-00001,CSE,Large Commercial (>= 10 kW),1536639.6,Commercial,Commercial,San Diego,San Diego,92121,2,6/30/2007,41303
+SD-CSI-00001,CSE,Large Commercial (>= 10 kW),1536639.6,Commercial,Commercial,San Diego,San Diego,92121,3,7/31/2007,38116
+SD-CSI-00001,CSE,Large Commercial (>= 10 kW),1536639.6,Commercial,Commercial,San Diego,San Diego,92121,4,8/31/2007,35243
+SCE-CSI-06676,SCE,Small Commercial (< 10 kW) and All Residential,26080,Residential,Residential,Manhattan Beach,Los Angeles,90266,57,12/1/2014,301
+SCE-CSI-06676,SCE,Small Commercial (< 10 kW) and All Residential,26080,Residential,Residential,Manhattan Beach,Los Angeles,90266,58,1/1/2015,234
+SCE-CSI-06676,SCE,Small Commercial (< 10 kW) and All Residential,26080,Residential,Residential,Manhattan Beach,Los Angeles,90266,59,2/1/2015,278
+SCE-CSI-06676,SCE,Small Commercial (< 10 kW) and All Residential,26080,Residential,Residential,Manhattan Beach,Los Angeles,90266,60,3/1/2015,312
+SCE-CSI-06720,SCE,Large Commercial (>= 10 kW),437294,Government,Government,Bishop,Mono,93514,1,2/1/2011,1705
+SCE-CSI-06720,SCE,Large Commercial (>= 10 kW),437294,Government,Government,Bishop,Mono,93514,2,3/1/2011,7497
+SCE-CSI-06720,SCE,Large Commercial (>= 10 kW),437294,Government,Government,Bishop,Mono,93514,3,4/1/2011,13100
+SCE-CSI-77165,SCE,Large Commercial (>= 10 kW),387450,Commercial,Non-Profit,Hanford,Kings,93230,5,9/1/2018,19010
+SCE-CSI-77165,SCE,Large Commercial (>= 10 kW),387450,Commercial,Non-Profit,Hanford,Kings,93230,6,10/1/2018,17328
+SCE-CSI-77165,SCE,Large Commercial (>= 10 kW),387450,Commercial,Non-Profit,Hanford,Kings,93230,7,11/1/2018,16424
+SCE-CSI-77165,SCE,Large Commercial (>= 10 kW),387450,Commercial,Non-Profit,Hanford,Kings,93230,8,12/1/2018,10156
+SCE-CSI-77165,SCE,Large Commercial (>= 10 kW),387450,Commercial,Non-Profit,Hanford,Kings,93230,9,1/1/2019,8386
+SCE-CSI-77165,SCE,Large Commercial (>= 10 kW),387450,Commercial,Non-Profit,Hanford,Kings,93230,10,2/1/2019,9970
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,15,12/16/2015,5666
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,16,1/16/2016,5280
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,17,2/16/2016,7643
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,18,3/16/2016,8423
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,19,4/16/2016,14559
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,20,5/16/2016,15600
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,21,6/16/2016,17936
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,22,7/16/2016,17542
+PGE-CSI-35695,PG&E,Large Commercial (>= 10 kW),1152502,Government,Government,Oakland,Alameda,94609,23,8/16/2016,16475
+PGE-CSI-22821,PG&E,Large Commercial (>= 10 kW),427368,Government,Government,Fort Bragg,Mendocino,95437,8,6/1/2011,12905

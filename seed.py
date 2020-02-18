@@ -11,6 +11,25 @@ from server import app
 #functions to import data to the model
 
 #companies #####################################
+def get_utility_name(utility):
+
+    """convert company abbreviations into company names"""
+    
+    if utility == 'CSE':
+        name = 'San Diego Gas and Electric'
+   
+    elif utility =='PG&E':
+        name = 'Pacific Gas and Electric'
+    
+    elif utility == 'SCE':
+        name = 'Southern California Edison'
+    
+    else:
+        name = utility
+
+    return name
+
+
 def load_companies():
     """Load companies information from seed file into the database.
     non-complete code.
@@ -77,17 +96,7 @@ def load_companies():
         for utility in utility_list:
             # convert company abbreviations into company names
             
-            if utility == 'CSE':
-                name = 'San Diego Gas and Electric'
-           
-            elif utility =='PG&E':
-                name = 'Pacific Gas and Electric'
-            
-            elif utility == 'SCE':
-                name = 'Southern California Edison'
-            
-            else:
-                name = utility
+            name = get_utility_name(utility)
 
             # create instances of the company class to add to the database 
             company = Company(name=name,
@@ -150,14 +159,36 @@ def load_programs():
                 # print(f'Column names are {", ".join(row)}')
                 line_count += 1
             else:
+                #get field values from the csv file
                 application_id = row[0]
+                
+                #get the utility id
                 utility_abreviation = row[1]
+                #convert utility code to company name
+                utility_name = get_utility_name(utility_abreviation)
+                c_name = Company.query.filter(Company.name == utility_name).one()
+                utility = c_name.company_id
+                print(f'utility: {utility}')
+
                 city = row[18]
                 county = row[19]
                 zipcode = row[21]
-                contractor_company = row[44]
-                pv_manuf_company = row[49]
-                invert_manuf_company = row[76]
+                
+                #get the contractor id
+                contractor_name = row[44]
+                c_name = Company.query.filter(Company.name == contractor_name).one()
+                contractor = c_name.company_id
+                
+                #get the pv manuf id
+                pv_manuf_name = row[49]
+                c_name = Company.query.filter(Company.name == pv_manuf_name).one()
+                pv_manuf = c_name.company_id
+                
+                #get the invert manuf id
+                invert_manuf_name = row[76]
+                c_name = Company.query.filter(Company.name == invert_manuf_name).one()
+                invert_manuf = c_name.company_id
+                
                 status = row[106]
 
                 # print functions for debugging:
@@ -166,6 +197,23 @@ def load_programs():
                 # print(f'{contractor_company}')
                 # print(f'{pv_manuf_company}')
                 # print(f'{invert_manuf}')
+
+                #add field values to an instance of Program
+                program = Program(application_id=application_id, 
+                                utility = utility, 
+                                city = city, 
+                                county = county, 
+                                zipcode = zipcode,
+                                contractor = contractor, 
+                                pv_manuf = pv_manuf, 
+                                invert_manuf = invert_manuf, 
+                                status = status)
+
+                # add the instance of program to the database
+                db.session.add(program)
+
+        # Commit our work so it saves to the database
+        db.session.commit()
 
 
 #productions######################################

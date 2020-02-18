@@ -10,7 +10,19 @@ from server import app
 ################################################################################
 #functions to import data to the model
 
-#companies #####################################
+def clear_tables():
+    """Delete data from all tables in the database. Delete in order to 
+    avoid errors related to foreign key relationships."""
+
+    # Delete all rows in table, so if we need to run this a second time,
+    # we won't be trying to add duplicate users
+    Production.query.delete()
+    Program.query.delete()
+    Company.query.delete()
+
+    print('ALL TABLES HAVE BEEN CLEARED OF THEIR DATA')
+
+
 def get_utility_name(utility):
 
     """convert company abbreviations into company names"""
@@ -29,6 +41,7 @@ def get_utility_name(utility):
 
     return name
 
+#companies #####################################
 
 def load_companies():
     """Load companies information from seed file into the database.
@@ -36,11 +49,6 @@ def load_companies():
     """
 
     print("Company")
-
-    # Delete all rows in table, so if we need to run this a second time,
-    # we won't be trying to add duplicate users
-    Company.query.delete()
-
 
     # opening seed file with the csv library and csv reader. 
     with open('seed_test/programs_test_csv.csv') as csv_file:
@@ -144,11 +152,6 @@ def load_programs():
 
     print("Program")
 
-    # Delete all rows in table, so if we need to run this a second time,
-    # we won't be trying to add duplicate users
-    Program.query.delete()
-
-
     # opening seed file with the csv library and csv reader. 
     with open('seed_test/programs_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -166,7 +169,7 @@ def load_programs():
                 utility_abreviation = row[1]
                 #convert utility code to company name
                 utility_name = get_utility_name(utility_abreviation)
-                c_name = Company.query.filter(Company.name == utility_name).one()
+                c_name = Company.query.filter(Company.name == utility_name).first()
                 utility = c_name.company_id
                 print(f'utility: {utility}')
 
@@ -176,27 +179,20 @@ def load_programs():
                 
                 #get the contractor id
                 contractor_name = row[44]
-                c_name = Company.query.filter(Company.name == contractor_name).one()
+                c_name = Company.query.filter(Company.name == contractor_name).first()
                 contractor = c_name.company_id
                 
                 #get the pv manuf id
                 pv_manuf_name = row[49]
-                c_name = Company.query.filter(Company.name == pv_manuf_name).one()
+                c_name = Company.query.filter(Company.name == pv_manuf_name).first()
                 pv_manuf = c_name.company_id
                 
                 #get the invert manuf id
                 invert_manuf_name = row[76]
-                c_name = Company.query.filter(Company.name == invert_manuf_name).one()
+                c_name = Company.query.filter(Company.name == invert_manuf_name).first()
                 invert_manuf = c_name.company_id
                 
                 status = row[106]
-
-                # print functions for debugging:
-                # print(f' LINE COUNT: {line_count}')
-                # print(f'{utility_abreviation}')
-                # print(f'{contractor_company}')
-                # print(f'{pv_manuf_company}')
-                # print(f'{invert_manuf}')
 
                 #add field values to an instance of Program
                 program = Program(application_id=application_id, 
@@ -218,46 +214,50 @@ def load_programs():
 
 #productions######################################
 
-# def load_productions():
-#     """Load production information from seed file into the database.
-#     NON-WORKING CODE
-#     need to add foreign key values (application_id) to programs table before this will run"""
+def load_productions():
+    """Load production information from seed file into the database.
+    NON-WORKING CODE
+    need to add foreign key values (application_id) to programs table before this will run"""
 
-#     print("Productions")
+    print("Productions")
 
-#     # Read productions file 
-#     for row in open("seed_test/productions_test_csv.csv"):
-#         row = row.rstrip() #may not need the rstrip but leaving it anyway.
-#         row = row.split(",")
-#         #print(row)
+    with open('seed_test/productions_test_csv.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
 
-#         application_id, _, _, _, _, _, _, _, _, _, end_date_initial, produced = row
-#         # print(application_id)
-#         # print(end_date)
-#         # print(produced)
+        for row in csv_reader:
+            if line_count == 0:
+                # print(f'Column names are {", ".join(row)}')
+                line_count += 1
+            else:
+                application_id = row[0]
+                end_date_string = row[10]
+                produced = row[11]
+
+                # print functions for debugging
+                # print(application_id)
+                # print(end_date)
+                # print(produced)
         
-#         #skip the header row
-#         if application_id != "Application Number":
-            
-#             #format the received end_date_initial to correspond with datetime:
-#             end_date_format = "%m/%d/%Y"
-#             end_date = datetime.strptime(end_date_initial, end_date_format)
-#             print(end_date)
+                # convert date string to date time
+                end_date_format = "%m/%d/%Y"
+                end_date = datetime.strptime(end_date_string, end_date_format)
+                # print(end_date)
 
-#             production = Production(application_id=application_id,
-#                             energy_type = 'solar',
-#                             end_date=end_date,
-#                             produced=produced,
-#                             )
-#             print(production)
+                production = Production(application_id=application_id,
+                                energy_type = 'solar',
+                                end_date=end_date,
+                                produced=produced,
+                                )
+                print(production)
 
-#             # Add to the session to the database
-#             db.session.add(production)
+                # Add to the session to the database
+                db.session.add(production)
 
-#     # Commit our work so it saves to the database
-#     db.session.commit()
+        # Commit our work so it saves to the database
+        db.session.commit()
 
-#consumptions######################################
+# consumptions######################################
 # def load_consumptions():
 #     """Load consumption information from seed file into the database.
 #     non-working code"""
@@ -274,9 +274,9 @@ if __name__ == "__main__":
     # In case tables haven't been created, create them
     db.create_all()
 
-    # Import different types of data
-    #   UNCOMMENT WHEN SEED.PY IS COMPLETE
+    # Run functions
+    clear_tables()
     load_companies()
-    # load_programs()
-    # load_productions()
+    load_programs()
+    load_productions()
     # load_consumptions()

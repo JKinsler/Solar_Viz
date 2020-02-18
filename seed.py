@@ -1,6 +1,7 @@
 """Utility file to seed soalr_viz database from CSI data"""
 
 import csv
+from query import check_application_id, get_company_id
 from sqlalchemy import func
 from datetime import datetime
 from model import Company, Program, Production, Consumption
@@ -11,8 +12,8 @@ from server import app
 #functions to import data to the model
 
 def clear_tables():
-    """Delete data from all tables in the database. Delete in order to 
-    avoid errors related to foreign key relationships."""
+    """Delete data from all tables in the database. 
+    Delete in dependancy reverse-order to avoid errors related to foreign key relationships."""
 
     # Delete all rows in table, so if we need to run this a second time,
     # we won't be trying to add duplicate users
@@ -24,7 +25,6 @@ def clear_tables():
 
 
 def get_utility_name(utility):
-
     """convert company abbreviations into company names"""
     
     if utility == 'CSE':
@@ -45,7 +45,7 @@ def get_utility_name(utility):
 
 def load_companies():
     """Load companies information from seed file into the database.
-    non-complete code.
+    working code.
     """
 
     print("Company")
@@ -147,8 +147,8 @@ def load_companies():
 #programs#####################################
 
 def load_programs():
-#     """Load programs information from seed file into the database.
-#     non-working code"""
+    """Load programs information from seed file into the database.
+    working code"""
 
     print("Program")
 
@@ -169,8 +169,7 @@ def load_programs():
                 utility_abreviation = row[1]
                 #convert utility code to company name
                 utility_name = get_utility_name(utility_abreviation)
-                c_name = Company.query.filter(Company.name == utility_name).first()
-                utility = c_name.company_id
+                utility = get_company_id(utility_name)
                 print(f'utility: {utility}')
 
                 city = row[18]
@@ -184,13 +183,11 @@ def load_programs():
                 
                 #get the pv manuf id
                 pv_manuf_name = row[49]
-                c_name = Company.query.filter(Company.name == pv_manuf_name).first()
-                pv_manuf = c_name.company_id
+                pv_manuf = get_company_id(pv_manuf_name)
                 
                 #get the invert manuf id
                 invert_manuf_name = row[76]
-                c_name = Company.query.filter(Company.name == invert_manuf_name).first()
-                invert_manuf = c_name.company_id
+                invert_manuf = get_company_id(invert_manuf_name)
                 
                 status = row[106]
 
@@ -216,8 +213,7 @@ def load_programs():
 
 def load_productions():
     """Load production information from seed file into the database.
-    NON-WORKING CODE
-    need to add foreign key values (application_id) to programs table before this will run"""
+    WORKING CODE"""
 
     print("Productions")
 
@@ -231,38 +227,69 @@ def load_productions():
                 line_count += 1
             else:
                 application_id = row[0]
-                end_date_string = row[10]
-                produced = row[11]
+                
+                #check if the application_id is in the programs table
+                id_check = check_application_id(application_id)
+                if id_check == True:
 
-                # print functions for debugging
-                # print(application_id)
-                # print(end_date)
-                # print(produced)
-        
-                # convert date string to date time
-                end_date_format = "%m/%d/%Y"
-                end_date = datetime.strptime(end_date_string, end_date_format)
-                # print(end_date)
+                    end_date_string = row[10]
+                    produced = row[11]
+            
+                    # convert date string to date time
+                    end_date_format = "%m/%d/%Y"
+                    end_date = datetime.strptime(end_date_string, end_date_format)
+                    # print(end_date)
+                    
+                    # print functions for debugging
+                    # print(application_id)
+                    # print(end_date)
+                    # print(produced)
+                    
+                    production = Production(application_id=application_id,
+                                    energy_type = 'solar',
+                                    end_date=end_date,
+                                    produced=produced,
+                                    )
+                    # print(production)
 
-                production = Production(application_id=application_id,
-                                energy_type = 'solar',
-                                end_date=end_date,
-                                produced=produced,
-                                )
-                print(production)
+                    # Add to the session to the database
+                    db.session.add(production)
+
+        # Commit our work so it saves to the database
+        db.session.commit()
+
+# consumptions######################################
+def load_consumptions():
+    """Load consumption information from seed file into the database.
+    non-working code"""
+
+    print("Consumptions")
+
+    with open('seed_test/consumptions_test_csv.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+
+        for row in csv_reader:
+            if line_count == 0:
+                # print(f'Column names are {", ".join(row)}')
+                line_count += 1
+            else:
+                utility_name = row[1]
+                utility = get_company_id(utility_name)
+
+                year = row[2]
+                consumed = row[10]
+                
+                consumption = Consumption(utility=utility_name,
+                                year = year,
+                                consumed = consumed)
+                # print(consumption)
 
                 # Add to the session to the database
                 db.session.add(production)
 
         # Commit our work so it saves to the database
         db.session.commit()
-
-# consumptions######################################
-# def load_consumptions():
-#     """Load consumption information from seed file into the database.
-#     non-working code"""
-
-#     print("Consumptions")
 
 
 ################################################################################
@@ -279,4 +306,4 @@ if __name__ == "__main__":
     load_companies()
     load_programs()
     load_productions()
-    # load_consumptions()
+    load_consumptions()

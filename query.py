@@ -93,11 +93,50 @@ def get_company(search_company_name):
 
 def get_company_id(search_company_name):
     """Return the id of a company which is given as an argument.
+    used in seed.py
     working code"""
 
-    c_name = Company.query.filter(Company.name == search_company_name).one()
+    c_name = Company.query.filter(Company.name == search_company_name).first()
     return c_name.company_id
 
+def get_like_company_id(search_company_name):
+    """Return the id of a company whose name matches the first 20 characters of 
+    the company which is used an an imput parameter.
+    used in seed.py
+    non working code"""
+
+    first_twenty = search_company_name[0:19]+'%'
+    # print(f'first_fifteen: {first_twenty}')
+    # print(type(first_twenty))
+
+    c_name = Company.query.filter(Company.name.like(first_twenty)).first()
+    # print(c_name)
+    return c_name.company_id
+
+
+def check_company_name(company_name):
+    """Check whether a comany name is in the company table.
+    working code."""
+
+    #look for the value of the application ID in the program table
+    name_check = Company.query.filter(Company.company_name == company_name).first()
+    if name_check != None:
+        return True
+    else:
+        return False
+
+
+def check_application_id(application_id):
+    """Check whether an application ID is in the programs table.
+    Used in seed.py.
+    Working code."""
+
+    #look for the value of the application ID in the program table
+    id_check = Program.query.filter(Program.application_id == application_id).first()
+    if id_check != None:
+        return True
+    else:
+        return False
 
 
 """joined load database tests"""

@@ -99,6 +99,7 @@ def get_company_id(search_company_name):
     c_name = Company.query.filter(Company.name == search_company_name).first()
     return c_name.company_id
 
+
 def get_like_company_id(search_company_name):
     """Return the id of a company whose name matches the first 20 characters of 
     the company which is used an an imput parameter.

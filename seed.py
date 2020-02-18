@@ -1,7 +1,7 @@
 """Utility file to seed soalr_viz database from CSI data"""
 
 import csv
-from query import check_application_id, get_company_id
+from query import check_application_id, get_company_id, get_like_company_id
 from sqlalchemy import func
 from datetime import datetime
 from model import Company, Program, Production, Consumption
@@ -17,11 +17,17 @@ def clear_tables():
 
     # Delete all rows in table, so if we need to run this a second time,
     # we won't be trying to add duplicate users
+    Consumption.query.delete()
     Production.query.delete()
     Program.query.delete()
     Company.query.delete()
 
     print('ALL TABLES HAVE BEEN CLEARED OF THEIR DATA')
+
+def inform_tables_loaded():
+    """indicate that all functions ran"""
+
+    print('ALL TABLES HAVE BEEN LOADED WITH DATA')
 
 
 def get_utility_name(utility):
@@ -170,7 +176,7 @@ def load_programs():
                 #convert utility code to company name
                 utility_name = get_utility_name(utility_abreviation)
                 utility = get_company_id(utility_name)
-                print(f'utility: {utility}')
+                # print(f'utility: {utility}')
 
                 city = row[18]
                 county = row[19]
@@ -215,7 +221,7 @@ def load_productions():
     """Load production information from seed file into the database.
     WORKING CODE"""
 
-    print("Productions")
+    print("Production")
 
     with open('seed_test/productions_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -259,11 +265,12 @@ def load_productions():
         db.session.commit()
 
 # consumptions######################################
+
 def load_consumptions():
     """Load consumption information from seed file into the database.
     non-working code"""
 
-    print("Consumptions")
+    print("Consumption")
 
     with open('seed_test/consumptions_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -275,18 +282,22 @@ def load_consumptions():
                 line_count += 1
             else:
                 utility_name = row[1]
-                utility = get_company_id(utility_name)
+                utility = get_like_company_id(utility_name)
 
                 year = row[2]
-                consumed = row[10]
                 
-                consumption = Consumption(utility=utility_name,
+                # consumed units must be converted from gWh to kWh
+                consumed = int(float(row[10])*1000000)
+                # print(f'consumed: {consumed}')
+                # print(type(consumed))
+                
+                consumption = Consumption(utility=utility,
                                 year = year,
                                 consumed = consumed)
                 # print(consumption)
 
                 # Add to the session to the database
-                db.session.add(production)
+                db.session.add(consumption)
 
         # Commit our work so it saves to the database
         db.session.commit()
@@ -307,3 +318,4 @@ if __name__ == "__main__":
     load_programs()
     load_productions()
     load_consumptions()
+    inform_tables_loaded()

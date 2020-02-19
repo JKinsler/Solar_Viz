@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Solar Viz</title>
+</head>
+<body>
+    <ul>
+      {% for message in get_flashed_messages() %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    Solar Viz
+
+    <hr>
+
+    {% block content %} put your content here {% endblock %}
+
+</body>
+</html>

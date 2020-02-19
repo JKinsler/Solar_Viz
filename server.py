@@ -23,8 +23,17 @@ app.jinja_env.undefined = StrictUndefined
 
 #MY CODE HERE ##########################
 
+@app.route('/')
+def index():
+    """Homepage."""
+    return render_template("homepage.html")
 
 
+@app.route("/data_viz")
+def show_solar_details():
+    """Show data vizualization details."""
+
+    return render_template("data_viz.html")
 
 
 #DUNDER NAME #########################

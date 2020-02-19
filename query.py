@@ -1,6 +1,7 @@
 """Write queries to call from server.py"""
 
 from model import Company, Program, Production, Consumption, connect_to_db, db
+from datetime import datetime
 
 
 ################################################################################
@@ -54,6 +55,53 @@ def get_production_values():
     return total_production
 
 
+def get_yearly_production_values():
+    """Return the solar production values by year
+    Output will be a dictionary with year: production as key value pairs.
+    
+    NON WORKING CODE
+
+    
+    Need a sql alchemy equivalent query to this psql query:
+
+    SELECT date_part('year', end_date) AS year, SUM(produced) as yearly_production
+    FROM productions
+    GROUP BY year
+    ORDER BY year;
+
+     year | yearly_production
+    ------+-------------------
+     2007 |            151240
+     2011 |             22302
+     2014 |               301
+     2015 |              6490
+     2016 |            103458
+     2018 |             62918
+     2019 |             18356
+    (7 rows)
+    
+
+    resource: https://www.postgresqltutorial.com/postgresql-date_part/
+    """
+
+    #get field values from the productions table
+    produced_list = get_production()
+
+    #make a query that gives available years from the productions table
+    dates = Production.query.filter_by(end_date == search_company_name).one()
+
+
+    # #sum the production values from the year
+    # total_production = 0
+    # # print(f'total_production is: {total_production}')
+    # for instance in produced_list:
+    #     # print(f'{instance.application_id}, {instance.produced}')
+    #     total_production += instance.produced
+    #     print(f'total_production is: {total_production} kWh, for 3 CSI utilities over all dates')
+
+    # return total_production
+
+
 def get_consumption_values():
     """Return the energy consumption value for all companies in all date ranges.
     working code"""
@@ -104,7 +152,7 @@ def get_like_company_id(search_company_name):
     """Return the id of a company whose name matches the first 20 characters of 
     the company which is used an an imput parameter.
     used in seed.py
-    non working code"""
+    working code"""
 
     first_twenty = search_company_name[0:19]+'%'
     # print(f'first_fifteen: {first_twenty}')

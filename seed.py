@@ -268,7 +268,7 @@ def load_productions():
 
 def load_consumptions():
     """Load consumption information from seed file into the database.
-    non-working code"""
+    working code"""
 
     print("Consumption")
 

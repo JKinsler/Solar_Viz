@@ -59,10 +59,9 @@ def get_yearly_production_values():
     """Return the solar production values by year
     Output will be a dictionary with year: production as key value pairs.
     
-    NON WORKING CODE
+    Non WORKING CODE
 
-    
-    Need a sql alchemy equivalent query to this psql query:
+    This is the equivalent psql query:
 
     SELECT date_part('year', end_date) AS year, SUM(produced) as yearly_production
     FROM productions
@@ -84,23 +83,13 @@ def get_yearly_production_values():
     resource: https://www.postgresqltutorial.com/postgresql-date_part/
     """
 
-    #get field values from the productions table
-    produced_list = get_production()
-
-    #make a query that gives available years from the productions table
-    dates = Production.query.filter_by(end_date == search_company_name).one()
-
-
-    # #sum the production values from the year
-    # total_production = 0
-    # # print(f'total_production is: {total_production}')
-    # for instance in produced_list:
-    #     # print(f'{instance.application_id}, {instance.produced}')
-    #     total_production += instance.produced
-    #     print(f'total_production is: {total_production} kWh, for 3 CSI utilities over all dates')
-
-    # return total_production
-
+    production_by_year = db.session.query(\
+                                        extract('year', Production.end_date),\
+                                        func.sum(Production.produced)\
+                                        .label('total'))\
+                                        .group_by(extract('year', Production.end_date)).all()
+    
+    return production_by_year
 
 def get_consumption_values():
     """Return the energy consumption value for all companies in all date ranges.

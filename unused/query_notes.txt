@@ -1,0 +1,51 @@
+helpful notes for sqlalchemy queries
+
+in query.py
+>>> from sqlalchemy import extract, func
+
+This query works:
+production = Production.query.filter(extract('year', Production.end_date) == 2007).all()
+
+[<Production application_id=SD-CSI-00001
+                   energy_type=solar
+                   end_date=2007-05-31 00:00:00
+                   produced=36578>, <Production application_id=SD-CSI-00001
+                   energy_type=solar
+                   end_date=2007-06-30 00:00:00
+                   produced=41303>, <Production application_id=SD-CSI-00001
+                   energy_type=solar
+                   end_date=2007-07-31 00:00:00
+                   produced=38116>, <Production application_id=SD-CSI-00001
+                   energy_type=solar
+                   end_date=2007-08-31 00:00:00
+                   produced=35243>]
+
+
+This query works:
+production_year = db.session.query(extract('year', Production.end_date)).all()
+
+>>> production_year
+[(2007.0,), (2007.0,), (2007.0,), (2007.0,), (2014.0,), (2015.0,), (2015.0,), (2015.0,), (2011.0,), (2011.0,), (2011.0,), (2018.0,), (2018.0,), (2018.0,), (2018.0,), (2019.0,), (2019.0,), (2015.0,), (2016.0,), (2016.0,), (2016.0,), (2016.0,), (2016.0,), (2016.0,), (2016.0,), (2016.0,)]
+
+This query works:
+production_year = db.session.query(extract('year', Production.end_date)).group_by(extract('year', Production.end_date)).all()
+
+>>> production_year
+[(2011.0,), (2015.0,), (2007.0,), (2019.0,), (2016.0,), (2014.0,), (2018.0,)]
+
+This query works:
+total_produced = db.session.query(func.sum(Production.produced).label('total')).all()
+
+>>> total_produced
+[(Decimal('365065'),)]
+
+>>> int(total_produced[0])
+
+This is the final query and it works!
+
+production_by_year = db.session.query(extract('year', Production.end_date), func.sum(Production.produced).label('total')).group_by(extract('year', Production.end_date)).all()
+
+>>> production_by_year
+[(2011.0, Decimal('22302')), (2015.0, Decimal('6490')), (2007.0, Decimal('151240')), (2019.0, Decimal('18356')), (2016.0, Decimal('103458')), (2014.0, Decimal('301')), (2018.0, Decimal('62918'))]
+
+Next step: order_by year!

@@ -2,6 +2,7 @@
 
 from model import Company, Program, Production, Consumption, connect_to_db, db
 from datetime import datetime
+from sqlalchemy import extract, func
 
 
 ################################################################################
@@ -55,11 +56,13 @@ def get_production_values():
     return total_production
 
 
-def get_yearly_production_values():
+def get_production_by_year():
     """Return the solar production values by year
     Output will be a dictionary with year: production as key value pairs.
     
-    Non WORKING CODE
+    WORKING CODE
+
+    used in server.py
 
     This is the equivalent psql query:
 
@@ -81,6 +84,8 @@ def get_yearly_production_values():
     
 
     resource: https://www.postgresqltutorial.com/postgresql-date_part/
+    
+    CAUTION - may need to change int to big int after seeding production database
     """
 
     production_by_year = db.session.query(\
@@ -89,7 +94,20 @@ def get_yearly_production_values():
                                         .label('total'))\
                                         .group_by(extract('year', Production.end_date)).all()
     
-    return production_by_year
+    # example of query output, based on seed_test productions table: 
+    # [(2011.0, Decimal('22302')), (2015.0, Decimal('6490')), 
+    # (2007.0, Decimal('151240')), (2019.0, Decimal('18356')), 
+    # (2016.0, Decimal('103458')), (2014.0, Decimal('301')), 
+    # (2018.0, Decimal('62918'))]
+
+
+    production_by_year_dict = {}
+
+    for year in production_by_year:
+        production_by_year_dict[int(year[0])] = int(year[1])
+
+    return production_by_year_dict
+
 
 def get_consumption_values():
     """Return the energy consumption value for all companies in all date ranges.

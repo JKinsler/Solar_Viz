@@ -84,15 +84,15 @@ def get_production_by_year():
     
 
     resource: https://www.postgresqltutorial.com/postgresql-date_part/
-    
-    CAUTION - may need to change int to big int after seeding production database
     """
 
     production_by_year = db.session.query(\
                                         extract('year', Production.end_date),\
                                         func.sum(Production.produced)\
                                         .label('total'))\
-                                        .group_by(extract('year', Production.end_date)).all()
+                                        .group_by(extract('year', Production.end_date))\
+                                        .order_by(extract('year', Production.end_date))\
+                                        .all()
     
     # example of query output, based on seed_test productions table: 
     # [(2011.0, Decimal('22302')), (2015.0, Decimal('6490')), 
@@ -101,6 +101,8 @@ def get_production_by_year():
     # (2018.0, Decimal('62918'))]
 
 
+    # format the output of the query into a dictionary
+    # CAUTION - may need to change int to big int after seeding production database
     production_by_year_dict = {}
 
     for year in production_by_year:

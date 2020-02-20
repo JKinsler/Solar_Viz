@@ -41,11 +41,16 @@ total_produced = db.session.query(func.sum(Production.produced).label('total')).
 
 >>> int(total_produced[0])
 
-This is the final query and it works!
-
+This works:
 production_by_year = db.session.query(extract('year', Production.end_date), func.sum(Production.produced).label('total')).group_by(extract('year', Production.end_date)).all()
 
 >>> production_by_year
 [(2011.0, Decimal('22302')), (2015.0, Decimal('6490')), (2007.0, Decimal('151240')), (2019.0, Decimal('18356')), (2016.0, Decimal('103458')), (2014.0, Decimal('301')), (2018.0, Decimal('62918'))]
 
 Next step: order_by year!
+
+This is the final query and it works!
+production_by_year = db.session.query(extract('year', Production.end_date), func.sum(Production.produced).label('total')).group_by(extract('year', Production.end_date)).order_by(extract('year', Production.end_date)).all()
+
+>>> production_by_year
+[(2007.0, Decimal('151240')), (2011.0, Decimal('22302')), (2014.0, Decimal('301')), (2015.0, Decimal('6490')), (2016.0, Decimal('103458')), (2018.0, Decimal('62918')), (2019.0, Decimal('18356'))]

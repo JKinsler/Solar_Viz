@@ -6,7 +6,9 @@ from flask import (Flask, render_template, redirect, request, flash,
                    session)
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Company, Program, Production, Consumption, connect_to_db, db
+from model import (Company, Program, Production, Consumption, connect_to_db, db)
+
+from query import (get_production_by_year)
 
 
 
@@ -32,6 +34,9 @@ def index():
 @app.route("/data_viz")
 def show_solar_details():
     """Show data vizualization details."""
+
+    #get production data by year. This will be a dictionary.
+    production_by_year = get_production_by_year()
 
     return render_template("data_viz.html")
 

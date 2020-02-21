@@ -1,55 +1,57 @@
 {% extends 'base.html' %}
 
+{% block head %}
+  
+{# ChartJS #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 
-{% block content %}
+{# randomColor: generate random colors #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
 
-  <h2>Solar Data Vizualization</h2>
+{% endblock %}
+
+
+{% block body %}
+
+<h2>Solar Data Vizualization</h2>
   <p><a href="/">go to the home page</a></p>
 
-  <!-- next steps: create a list that shows years and production values
-  Step 0: practices setting up javasript files with html so that the java script writes content to the page
-  step 1: pass in the value of the production dictionary
-  step 2: run the script, make sure to pass in the correct value 
-  -->
-
-<script type = "text / javascript" src="/scripts/test_listener.js"></script>
-
-
-<h2>Yearly Production Data for All Utilities</h2>
-<table class="showing_solar_data" id="YPT">
+<h2>Yearly Production Data for All Utilities - Jinja</h2> 
+  <p>Showing table data that was implemented with Jinja</p>
+  <table class="showing_solar_data" id="YPT">
     <tr>
-        <th>
-            year
-        </th>
-        <th>
-            production
-        </th>
+      <th>
+          year
+      </th>
+      <th>
+          production
+      </th>
     </tr>
-        {% for year, production in production_by_year.items() %}
-        <tr>
-        <td>
-            {{ year }}
-        </td>
-        <td>
-            {{production}} kWh
-        </td>
+    {% for year, production in production_by_year.items() %}
+    <tr>
+      <td>
+        {{ year }}
+      </td>
+      <td>
+        {{production}} kWh
+      </td>
     </tr>
-        {% endfor %}
-</table>
-
-<!-- <h3>Practicing JavaScript in .html Body</h3>
-<div class="show_data"></div> 
-    <script>document.write('Hello Johanna')</script>
-    <p>
-        <script type="text/javascript">document.write('Hello Again Johanna')</script>
-    </p> 
-    <p>
-        <script type="text/javascript">sayHello()</script>
-    </p>   
-
-<h4>Passing a Variable to the Browser</h4>
-<p>{{production_by_year}}</p> -->
+    {% endfor %}
+  </table>
 
 <h4>Congratulations Johanna on completing your MVP!</h4>
+
+<h2>Yearly Production Data for All Utilities - chart.js</h2>
+
+<div id="site content">
+  
+  <h4>Practicing a basic chart, but with Chart.js</h4>
+  <canvas id="bar-chart"></canvas>
+  <script src="/scripts/basic_bar_chart.js"></script>
+
+</div>
+
+
 {% endblock %}
+
 

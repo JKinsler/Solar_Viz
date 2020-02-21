@@ -69,9 +69,9 @@ def load_companies():
     print("Company")
 
     # opening seed file with the csv library and csv reader. 
-    # with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
+    with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
     # below line will load 'test' seed file
-    with open('seed_test/programs_test_csv.csv') as csv_file:
+    # with open('seed_test/programs_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         
@@ -174,9 +174,9 @@ def load_programs():
     print("Program")
 
     # opening seed file with the csv library and csv reader. 
-    # with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
+    with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
     # below will seed with 'test' data
-    with open('seed_test/programs_test_csv.csv') as csv_file:
+    # with open('seed_test/programs_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         
@@ -244,9 +244,9 @@ def load_productions():
 
     print("Production")
 
-    # with open('seed_production/MeasuredProduction_2-19-2020.csv') as csv_file:
+    with open('seed_production/MeasuredProduction_2-19-2020.csv') as csv_file:
     # below will seed with 'test' data.
-    with open('seed_test/productions_test_csv.csv') as csv_file:
+    # with open('seed_test/productions_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
 
@@ -302,9 +302,9 @@ def load_consumptions():
 
     print("Consumption")
 
-    # with open('seed_production/ElectricityByUtility_2-20-20.csv') as csv_file:
+    with open('seed_production/ElectricityByUtility_2-20-2020.csv') as csv_file:
     # below will seed with 'test' data.
-    with open('seed_test/consumptions_test_csv.csv') as csv_file:
+    # with open('seed_test/consumptions_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
 
@@ -383,14 +383,17 @@ Timer data from 'seed_production' files:
 ALL TABLES HAVE BEEN CLEARED OF THEIR DATA
 Company
 Company line_count: 174344
-Time to seed companies:  -8.56147516699275
+Time to seed companies:  -8.612042455992196
 Program
 Program line_count: 174344
-Time to seed programs:  -1507.7687172190053
+Time to seed programs:  -1493.2976502100064
 Production
 Production line_count: 208612
-Time to seed productions:  -659.3654862760159
+Time to seed productions:  -666.5932022799971
 Consumption
+Consumption line_count: 88
+Time to seed consumptions:  -0.26305283699184656
+ALL TABLES HAVE BEEN LOADED WITH DATA
 
 
 

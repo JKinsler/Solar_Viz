@@ -1,4 +1,8 @@
-"""Utility file to seed soalr_viz database from CSI data"""
+"""Utility file to seed soalr_viz database from CSI data.
+
+HAVE OPTION TO USE PRODUCTION OR TEST DATA FOR SEEDING.
+MUST CHANGE DATABASE ROUTE IN MODEL.PY WHEN SWITCHING BETWEEN THE TWO."""
+
 
 import csv
 from query import check_application_id, get_company_id, get_like_company_id
@@ -7,6 +11,7 @@ from datetime import datetime
 from model import Company, Program, Production, Consumption
 from model import connect_to_db, db
 from server import app
+import timeit
 
 ################################################################################
 #functions to import data to the model
@@ -47,7 +52,14 @@ def get_utility_name(utility):
 
     return name
 
+
+def check_date():
+    date_today = datetime.now()
+
+    return date_today
+
 #companies #####################################
+
 
 def load_companies():
     """Load companies information from seed file into the database.
@@ -57,6 +69,8 @@ def load_companies():
     print("Company")
 
     # opening seed file with the csv library and csv reader. 
+    # with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
+    # below line will load 'test' seed file
     with open('seed_test/programs_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -148,9 +162,10 @@ def load_companies():
 
     # Commit our work so it saves to the database
     db.session.commit()
-
+    print(f'Company line_count: {line_count}')
 
 #programs#####################################
+
 
 def load_programs():
     """Load programs information from seed file into the database.
@@ -159,6 +174,8 @@ def load_programs():
     print("Program")
 
     # opening seed file with the csv library and csv reader. 
+    # with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
+    # below will seed with 'test' data
     with open('seed_test/programs_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -211,8 +228,12 @@ def load_programs():
                 # add the instance of program to the database
                 db.session.add(program)
 
+                line_count+=1
+
         # Commit our work so it saves to the database
         db.session.commit()
+
+        print(f'Program line_count: {line_count}')
 
 
 #productions######################################
@@ -223,9 +244,13 @@ def load_productions():
 
     print("Production")
 
+    # with open('seed_production/MeasuredProduction_2-19-2020.csv') as csv_file:
+    # below will seed with 'test' data.
     with open('seed_test/productions_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
+
+        date_today = check_date()
 
         for row in csv_reader:
             if line_count == 0:
@@ -251,18 +276,23 @@ def load_productions():
                     # print(end_date)
                     # print(produced)
                     
-                    production = Production(application_id=application_id,
-                                    energy_type = 'solar',
-                                    end_date=end_date,
-                                    produced=produced,
-                                    )
-                    # print(production)
+                    # add data from real past dates only
+                    if date_today > end_date:
+                        production = Production(application_id=application_id,
+                                        energy_type = 'solar',
+                                        end_date=end_date,
+                                        produced=produced,
+                                        )
+                        # print(production)
 
-                    # Add to the session to the database
-                    db.session.add(production)
+                        # Add to the session to the database
+                        db.session.add(production)
+
+                    line_count+=1
 
         # Commit our work so it saves to the database
         db.session.commit()
+        print(f'Production line_count: {line_count}')
 
 # consumptions######################################
 
@@ -272,6 +302,8 @@ def load_consumptions():
 
     print("Consumption")
 
+    # with open('seed_production/ElectricityByUtility_2-20-20.csv') as csv_file:
+    # below will seed with 'test' data.
     with open('seed_test/consumptions_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -299,8 +331,12 @@ def load_consumptions():
                 # Add to the session to the database
                 db.session.add(consumption)
 
+                line_count+=1
+
         # Commit our work so it saves to the database
         db.session.commit()
+
+        print(f'Consumption line_count: {line_count}')
 
 
 ################################################################################
@@ -314,8 +350,65 @@ if __name__ == "__main__":
 
     # Run functions
     clear_tables()
+    
+    #seed data for each table. User timer to see how long it takes.
+    start_companies = timeit.default_timer()
     load_companies()
+    stop_companies = timeit.default_timer()
+    print('Time to seed companies: ', start_companies - stop_companies)
+
+    start_programs = timeit.default_timer()
     load_programs()
+    stop_programs = timeit.default_timer()
+    print('Time to seed programs: ', start_programs - stop_programs)
+
+    start_productions = timeit.default_timer()
     load_productions()
+    stop_productions = timeit.default_timer()
+    print('Time to seed productions: ', start_productions - stop_productions)
+
+    start_consumptions = timeit.default_timer()
     load_consumptions()
+    stop_consumptions = timeit.default_timer()
+    print('Time to seed consumptions: ', start_consumptions - stop_consumptions)
+
     inform_tables_loaded()
+
+
+
+"""
+Timer return values are in 'seconds'
+
+Timer data from 'seed_production' files:
+ALL TABLES HAVE BEEN CLEARED OF THEIR DATA
+Company
+Company line_count: 174344
+Time to seed companies:  -8.56147516699275
+Program
+Program line_count: 174344
+Time to seed programs:  -1507.7687172190053
+Production
+Production line_count: 208612
+Time to seed productions:  -659.3654862760159
+Consumption
+
+
+
+
+Timer data from 'seed_test' files:
+ALL TABLES HAVE BEEN CLEARED OF THEIR DATA
+Company
+Company line_count: 7
+Time to seed companies:  -0.01644753699656576
+Program
+Program line_count: 7
+Time to seed companies:  -0.04395975999068469
+Production
+Production line_count: 27
+Time to seed companies:  -0.10117992598679848
+Consumption
+Consumption line_count: 24
+Time to seed companies:  -0.07823562799603678
+ALL TABLES HAVE BEEN LOADED WITH DATA
+
+"""

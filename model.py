@@ -20,7 +20,7 @@ class Company(db.Model):
 
     company_id = db.Column(db.Integer, autoincrement=True, primary_key=True, 
                     nullable=False)
-    name = db.Column(db.String(64), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     company_type = db.Column(db.String(64), nullable=False)
     
     """table relationships """
@@ -158,7 +158,11 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PstgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz'
+    # connect to the production database
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz'
+
+    # connect to the test database
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz_test'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)

@@ -1,0 +1,30 @@
+These are notes to help with the scripts files
+
+# Javascript files #############################################################
+
+In the terminal:
+1. Running 'node' with no arguments starts the REPL
+
+$ node
+>
+
+2. node <filepath> runs a file
+
+$ node server.js
+
+3. To run a file interactively, you have to open the REPL and then use .load
+
+$ node
+> .load my_script.js
+
+
+Use Strict
+Let JavaScript Help You
+"use strict"; at top of file
+- Raises error for undeclared variables
+- Raises error for other common JS mistakes
+- See MDN JavaScript Reference: Strict Mode for more info
+
+Example of file header:
+"use strict";
+// More code goes here

@@ -1,7 +1,55 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
 
   <h2>Solar Data Vizualization</h2>
   <p><a href="/">go to the home page</a></p>
 
+  <!-- next steps: create a list that shows years and production values
+  Step 0: practices setting up javasript files with html so that the java script writes content to the page
+  step 1: pass in the value of the production dictionary
+  step 2: run the script, make sure to pass in the correct value 
+  -->
+
+<script type = "text / javascript" src="/scripts/test_listener.js"></script>
+
+
+<h2>Yearly Production Data for All Utilities</h2>
+<table class="showing_solar_data" id="YPT">
+    <tr>
+        <th>
+            year
+        </th>
+        <th>
+            production
+        </th>
+    </tr>
+        {% for year, production in production_by_year.items() %}
+        <tr>
+        <td>
+            {{ year }}
+        </td>
+        <td>
+            {{production}} kWh
+        </td>
+    </tr>
+        {% endfor %}
+</table>
+
+<!-- <h3>Practicing JavaScript in .html Body</h3>
+<div class="show_data"></div> 
+    <script>document.write('Hello Johanna')</script>
+    <p>
+        <script type="text/javascript">document.write('Hello Again Johanna')</script>
+    </p> 
+    <p>
+        <script type="text/javascript">sayHello()</script>
+    </p>   
+
+<h4>Passing a Variable to the Browser</h4>
+<p>{{production_by_year}}</p> -->
+
+<h4>Congratulations Johanna on completing your MVP!</h4>
 {% endblock %}
+

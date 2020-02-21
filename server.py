@@ -38,8 +38,10 @@ def show_solar_details():
     #get production data by year. This will be a dictionary.
     production_by_year = get_production_by_year()
 
-    return render_template("data_viz.html")
+    return render_template("data_viz.html", production_by_year = production_by_year)
 
+# in future update routes to GET and POST methods and pass data in to javascript
+# may need to update data type to be better for chart.js
 
 #DUNDER NAME #########################
 

@@ -3,7 +3,7 @@
 {% block head %}
   
 {# ChartJS #}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 
 {# randomColor: generate random colors #}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
@@ -44,14 +44,16 @@
 <h2>Yearly Production Data for All Utilities - chart.js</h2>
 
 <div id="site content">
-  
-  <h4>Practicing a basic chart, but with Chart.js</h4>
+  <p>Practicing a basic chart with Chart.js</p>
   <canvas id="bar-chart"></canvas>
-  <script src="/scripts/basic_bar_chart.js"></script>
-
+  
+  <p>Practicing a bar chart with colors in Chart.js</p>
+  <canvas id="bar-colors"></canvas>
 </div>
-
 
 {% endblock %}
 
 
+{% block js %}
+<script src="/static/js//basic_bar_chart.js"></script>
+{% endblock %}

@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Solar Viz</title>
     
-    <!-- JQuery script tag -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
+    {# jQuery #}
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin></script>
     
     {% block head %}{% endblock %}
 
-</head>
-<body>
-    <ul>
-      {% for message in get_flashed_messages() %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    Solar Viz
-
-    <hr>
+  </head>
+  <body>
+    <div>
+      <ul>
+        {% for message in get_flashed_messages() %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
 
     {% block body %}{% endblock %}
 
-</body>
+    {% block js %}{% endblock %}
+  </body>
 </html>

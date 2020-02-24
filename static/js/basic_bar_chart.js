@@ -8,12 +8,8 @@ const barChart = new Chart(
       labels: ['Watermelon', 'Canteloupe', 'Honeydew'],
       datasets: [
         {
-          label: 'Today',
+          label: 'total production',
           data: [25, 36, 27]
-        },
-        {
-          label: 'Yesterday',
-          data: [5, 0, 7]
         }
       ]
     }

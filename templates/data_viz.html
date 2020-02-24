@@ -20,7 +20,7 @@
 
 {% block body %}
 
-<!-- <h2>Solar Data Vizualization</h2>
+<h2>Solar Data Vizualization</h2>
   <p><a href="/">go to the home page</a></p>
 
 <h2>Yearly Production Data for All Utilities - Jinja</h2> 
@@ -46,13 +46,13 @@
     {% endfor %}
   </table>
 
-<h4>Congratulations Johanna on completing your MVP!</h4> -->
+<h4>Congratulations Johanna on completing your MVP!</h4>
 
 <h2>Yearly Production Data for All Utilities - chart.js</h2>
 
-<!-- <div id="site content">
+<div id="site content">
   <p>Practicing a basic chart with Chart.js</p>
-  <canvas id="bar-chart"></canvas> -->
+  <canvas id="bar-chart"></canvas>
   
   <p>Practicing a bar chart with solar data in Chart.js</p>
   <canvas id="bar-solar"></canvas>
@@ -62,31 +62,98 @@
 
 
 {% block js %}
-<!-- <script src="/static/js//basic_bar_chart.js"></script> -->
+<script src="/static/js//basic_bar_chart.js"></script>
 
 <script>
+  const barSolarChart = new Chart(
+  $('#bar-solar'),
+  {
+    type: 'bar',
+    data: {
+      labels: ['2008', '2009', '2010'],
+      datasets: [
+        {
+          label: 'total solar production',
+          data: [5000, 7000, 8000]
+        }
+      ]
+    },
+    options: {
+      datasets: {
+        bar: {
+          // We use a function to automatically set the background color of
+          // each bar in the bar chart.
+          //
+          // There are many other properties that accept functions. For more
+          // information see: https://www.chartjs.org/docs/latest/general/options.html#scriptable-options
+          backgroundColor: () => {
+            // `randomColor` is a JS module we found off GitHub: https://github.com/davidmerfield/randomColor
+            // We imported it in templates/chartjs.html
+            return randomColor();
+          }
+        }
+      },
+      scales: {
+        // This is where you can configure x- and y-axes if you don't like the
+        // automatic range that Chart.js sets for you.
+        //
+        // For more info see: https://www.chartjs.org/docs/latest/axes/cartesian/
+        yAxes: [
+          {
+            ticks: {
+              min: 0,
+              max: 10000
+            }
+          },
+        ]
+      }
+    }
+  }
+);
+
+</script>
+
+<!-- <script>
   const timeFormat = 'YYYY';
 
   const solarBarChart = new Chart(
     $('#bar-solar'),
     {
       type: 'bar',
-      data: [{x: "2014", y: 7000}, 
-            {x: "2015", y: 8000},
-            {x: "2016", y: 9000},
-            {x: "2017", y: 10000}],
+      data: [{x:'2016-12-25', y:20}, 
+            {x:'2017-12-25', y:20},
+            {x:'2018-12-25', y:20},
+            {x:'2019-12-25', y:20}],
       options: {
         scales: {
           xAxes: [{
             type: 'time',
-            time: {format: timeFormat}
+            time: {
+              unit: 'year'
+             
+            }
           }]
-        }
+        },
+        // tooltips: {
+        //   callbacks: {
+        //     title: (tooltipItem) => {
+        //       return moment(tooltipItem.label).format('YYYY')
+        //     }
+        //   }
+        // }
       }
     }
   );
-</script>
+</script> -->
 {% endblock %}
 
 <!-- check out this example in the documentation
 https://www.chartjs.org/docs/latest/axes/cartesian/time.html#time-cartesian-axis -->
+
+<!-- Things I investigated: 
+time scale: "time.format" is deprecated. Please use "time.parser" instead
+_deprecated @ Chart.js:2416 
+
+time: {displayFormats: timeFormat}
+gave a 
+-->

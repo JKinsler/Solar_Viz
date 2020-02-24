@@ -69,9 +69,9 @@ def load_companies():
     print("Company")
 
     # opening seed file with the csv library and csv reader. 
-    with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
+    # with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
     # below line will load 'test' seed file
-    # with open('seed_test/programs_test_csv.csv') as csv_file:
+    with open('seed_test/programs_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         
@@ -174,9 +174,9 @@ def load_programs():
     print("Program")
 
     # opening seed file with the csv library and csv reader. 
-    with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
+    # with open('seed_production/WorkingDataSet_2-19-2020.csv') as csv_file:
     # below will seed with 'test' data
-    # with open('seed_test/programs_test_csv.csv') as csv_file:
+    with open('seed_test/programs_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         
@@ -244,9 +244,9 @@ def load_productions():
 
     print("Production")
 
-    with open('seed_production/MeasuredProduction_2-19-2020.csv') as csv_file:
+    # with open('seed_production/MeasuredProduction_2-19-2020.csv') as csv_file:
     # below will seed with 'test' data.
-    # with open('seed_test/productions_test_csv.csv') as csv_file:
+    with open('seed_test/productions_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
 
@@ -302,9 +302,9 @@ def load_consumptions():
 
     print("Consumption")
 
-    with open('seed_production/ElectricityByUtility_2-20-2020.csv') as csv_file:
+    # with open('seed_production/ElectricityByUtility_2-20-2020.csv') as csv_file:
     # below will seed with 'test' data.
-    # with open('seed_test/consumptions_test_csv.csv') as csv_file:
+    with open('seed_test/consumptions_test_csv.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
 

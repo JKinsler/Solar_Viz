@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import (Flask, render_template, redirect, request, flash,
+from flask import (Flask, jsonify, render_template, redirect, request, flash,
                    session)
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -44,7 +44,10 @@ def show_solar_details():
     # 'labels' should be a list
     datasets, labels = format_production_for_chartjs()
 
-    return render_template("data_viz.html", production_by_year = production_by_year)
+    return (render_template("data_viz.html", production_by_year = production_by_year))
+
+    # need to figure out how to jsonify data to send it to the server.
+    # jsonify(datasets), jsonify(labels) 
 
 # in future update routes to GET and POST methods and pass data in to javascript
 # may need to update data type to be better for chart.js

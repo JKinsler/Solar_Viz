@@ -32,7 +32,6 @@ Example of file header:
 
 
 
-
 # Javascript + Chart JS #######################################################
 Failed experimentation with Chart.JS and timescales:
 THIS CODE DOES NOT WORK

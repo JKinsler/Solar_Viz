@@ -3,6 +3,8 @@
 from model import Company, Program, Production, Consumption, connect_to_db, db
 from datetime import datetime
 from sqlalchemy import extract, func
+import json
+
 
 
 ################################################################################
@@ -126,17 +128,20 @@ def format_production_for_chartjs():
 
     production_by_year = get_production_by_year()
 
-    production_list = []
+    production_datasets = []
     yearly_labels = []
     for year in production_by_year:
-        yearly_labels.append((str(int(year[0]))))
+        yearly_labels.append(str(int(year[0])))
         
         yearly_dataset = {}
-        yearly_dataset['x'] = str(int(year[0]))
-        yearly_dataset['y'] = int(year[1])
-        production_list.append(yearly_dataset)
+        yearly_dataset["x"] = str(int(year[0]))
+        yearly_dataset["y"] = int(year[1])
+        production_datasets.append(yearly_dataset)
 
-    return production_list, yearly_labels
+    yearly_labels_json = json.dumps(yearly_labels)
+    production_datasets_json = json.dumps(production_datasets)
+
+    return yearly_labels_json, production_datasets_json
 
 
 def get_consumption_values():

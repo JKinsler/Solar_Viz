@@ -107,7 +107,7 @@ def get_production_by_year():
     return production_by_year
 
 
-def format_production_for_list():
+def format_production_for_table():
     """Re-format get_production_by_year output so it's compatible with  jinja 
     table."""
 
@@ -120,20 +120,23 @@ def format_production_for_list():
     return production_by_year_dict
 
 
-def format_production_for_list():
+def format_production_for_chartjs():
     """Re-format get_production_by_year output so it's compatible with  jinja 
     table."""
 
     production_by_year = get_production_by_year()
 
     production_list = []
+    yearly_labels = []
     for year in production_by_year:
-        yearly_values = {}
-        yearly_values['x'] = int(year[0])
-        yearly_values['y'] = int(year[1])
-        production_list.append(yearly_values)
+        yearly_labels.append((str(int(year[0]))))
+        
+        yearly_dataset = {}
+        yearly_dataset['x'] = str(int(year[0]))
+        yearly_dataset['y'] = int(year[1])
+        production_list.append(yearly_dataset)
 
-    return production_list
+    return production_list, yearly_labels
 
 
 def get_consumption_values():

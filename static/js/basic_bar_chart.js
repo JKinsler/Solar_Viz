@@ -1,7 +1,7 @@
 "use strict";
 
-const barChart = new Chart(
-  $('#bar-chart'),
+const basicBarChart = new Chart(
+  $('#basic-bar-chart'),
   {
     type: 'bar',
     data: {

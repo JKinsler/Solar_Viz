@@ -36,35 +36,3 @@ Example of file header:
 # Javascript + Chart JS #######################################################
 Failed experimentation with Chart.JS and timescales:
 THIS CODE DOES NOT WORK
-<!-- <script>
-  const timeFormat = 'YYYY';
-
-  const solarBarChart = new Chart(
-    $('#bar-solar'),
-    {
-      type: 'bar',
-      data: [{x:'2016-12-25', y:20}, 
-            {x:'2017-12-25', y:20},
-            {x:'2018-12-25', y:20},
-            {x:'2019-12-25', y:20}],
-      options: {
-        scales: {
-          xAxes: [{
-            type: 'time',
-            time: {
-              unit: 'year'
-             
-            }
-          }]
-        },
-        // tooltips: {
-        //   callbacks: {
-        //     title: (tooltipItem) => {
-        //       return moment(tooltipItem.label).format('YYYY')
-        //     }
-        //   }
-        // }
-      }
-    }
-  );
-</script> -->

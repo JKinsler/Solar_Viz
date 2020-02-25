@@ -51,22 +51,31 @@
 <h2>Yearly Production Data for All Utilities - chart.js</h2>
 
 <div id="site content">
-  <p>Practicing a basic chart with Chart.js</p>
-  <canvas id="bar-chart"></canvas>
+  <p>1. Practicing a basic bar chart with Chart.js</p>
+  <canvas id="basic-bar-chart"></canvas>
+
+  <p>2. Practicing a bar chart with dates in Chart.js</p>
+  <canvas id="bar-chart2"></canvas>
   
-  <p>Practicing a bar chart with solar data in Chart.js</p>
-  <canvas id="bar-solar"></canvas>
+  <p>3. Practicing a bar chart with solar data in Chart.js</p>
+  <canvas id="bar-chart3"></canvas>
+
+  <p>4. Practicing a bar chart with solar data in Chart.js</p>
+  <canvas id="bar-chart4"></canvas>
 </div>
 
 {% endblock %}
 
 
 {% block js %}
-<!-- <script src="/static/js//basic_bar_chart.js"></script> -->
+<script src="/static/js/basic_bar_chart.js"></script>
+<script src="/static/js/bar-chart-two.js"></script>
+<!-- <script src="/static/js/bar_chart-three.js"></script> -->
+<script src="/static/js//bar_chart4.js"></script>
 
 <script>
-  const barSolarChart = new Chart(
-  $('#bar-solar'),
+const barChart3 = new Chart(
+  $('#bar-chart3'),
   {
     type: 'bar',
     data: {
@@ -110,52 +119,9 @@
     }
   }
 );
-
 </script>
-
-<script>
-  const timeFormat = 'YYYY';
-
-  const solarBarChart = new Chart(
-    $('#bar-chart'),
-    {
-      type: 'bar',
-      data: [{x:'2016-12-25', y:20}, 
-            {x:'2017-12-25', y:20},
-            {x:'2018-12-25', y:20},
-            {x:'2019-12-25', y:20}],
-      options: {
-        scales: {
-          xAxes: [{
-            type: 'time',
-            time: {
-              unit: 'year'
-             
-            }
-          }]
-        },
-        // tooltips: {
-        //   callbacks: {
-        //     title: (tooltipItem) => {
-        //       return moment(tooltipItem.label).format('YYYY')
-        //     }
-        //   }
-        // }
-      }
-    }
-  );
-</script>
-
 
 {% endblock %}
 
 <!-- check out this example in the documentation
 https://www.chartjs.org/docs/latest/axes/cartesian/time.html#time-cartesian-axis -->
-
-<!-- Things I investigated: 
-time scale: "time.format" is deprecated. Please use "time.parser" instead
-_deprecated @ Chart.js:2416 
-
-time: {displayFormats: timeFormat}
-gave a 
--->

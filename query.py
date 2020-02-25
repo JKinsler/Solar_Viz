@@ -135,7 +135,7 @@ def format_production_for_chartjs():
         
         yearly_dataset = {}
         yearly_dataset["x"] = str(int(year[0]))
-        yearly_dataset["y"] = int(year[1])
+        yearly_dataset["y"] = float(year[1]/1000)
         production_datasets.append(yearly_dataset)
 
     yearly_labels_json = json.dumps(yearly_labels)

@@ -42,12 +42,13 @@ def show_solar_details():
     #get production data by year. 
     # 'datasets' should be a list of dictionaries
     # 'labels' should be a list
-    datasets, labels = format_production_for_chartjs()
+    yearly_labels_json, production_datasets_json = format_production_for_chartjs()
 
-    return (render_template("data_viz.html", production_by_year = production_by_year))
+    return (render_template("data_viz.html",\
+            production_by_year = production_by_year,\
+            yearly_labels_json = yearly_labels_json, \
+            production_datasets_json = production_datasets_json))
 
-    # need to figure out how to jsonify data to send it to the server.
-    # jsonify(datasets), jsonify(labels) 
 
 # in future update routes to GET and POST methods and pass data in to javascript
 # may need to update data type to be better for chart.js

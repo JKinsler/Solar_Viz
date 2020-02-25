@@ -62,7 +62,7 @@
 
 
 {% block js %}
-<script src="/static/js//basic_bar_chart.js"></script>
+<!-- <script src="/static/js//basic_bar_chart.js"></script> -->
 
 <script>
   const barSolarChart = new Chart(
@@ -113,11 +113,11 @@
 
 </script>
 
-<!-- <script>
+<script>
   const timeFormat = 'YYYY';
 
   const solarBarChart = new Chart(
-    $('#bar-solar'),
+    $('#bar-chart'),
     {
       type: 'bar',
       data: [{x:'2016-12-25', y:20}, 
@@ -144,7 +144,9 @@
       }
     }
   );
-</script> -->
+</script>
+
+
 {% endblock %}
 
 <!-- check out this example in the documentation

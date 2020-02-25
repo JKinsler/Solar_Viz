@@ -103,12 +103,37 @@ def get_production_by_year():
 
     # format the output of the query into a dictionary
     # CAUTION - may need to change int to big int after seeding production database
-    production_by_year_dict = {}
+    
+    return production_by_year
 
+
+def format_production_for_list():
+    """Re-format get_production_by_year output so it's compatible with  jinja 
+    table."""
+
+    production_by_year = get_production_by_year()
+
+    production_by_year_dict = {}
     for year in production_by_year:
         production_by_year_dict[int(year[0])] = int(year[1])
 
     return production_by_year_dict
+
+
+def format_production_for_list():
+    """Re-format get_production_by_year output so it's compatible with  jinja 
+    table."""
+
+    production_by_year = get_production_by_year()
+
+    production_list = []
+    for year in production_by_year:
+        yearly_values = {}
+        yearly_values['x'] = int(year[0])
+        yearly_values['y'] = int(year[1])
+        production_list.append(yearly_values)
+
+    return production_list
 
 
 def get_consumption_values():

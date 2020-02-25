@@ -8,7 +8,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import (Company, Program, Production, Consumption, connect_to_db, db)
 
-from query import (get_production_by_year)
+from query import (get_production_by_year, format_production_for_list)
 
 
 
@@ -36,7 +36,7 @@ def show_solar_details():
     """Show data vizualization details."""
 
     #get production data by year. This will be a dictionary.
-    production_by_year = get_production_by_year()
+    production_by_year = format_production_for_list()
 
     return render_template("data_viz.html", production_by_year = production_by_year)
 

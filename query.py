@@ -109,9 +109,23 @@ def get_production_by_year():
     return production_by_year
 
 
+def get_production_years():
+    """Return all years of solar energy production from the database.
+    Used in server.py"""
+
+    production_by_year = get_production_by_year()
+
+    years = []
+    for year in production_by_year:
+        years.append(str(int(year[0])))
+
+    return years
+
+
 def format_production_for_table():
     """Re-format get_production_by_year output so it's compatible with  jinja 
-    table."""
+    table.
+    Used in server.py"""
 
     production_by_year = get_production_by_year()
 

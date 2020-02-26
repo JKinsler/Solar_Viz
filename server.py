@@ -9,7 +9,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import (Company, Program, Production, Consumption, connect_to_db, db)
 
 from query import (get_production_by_year, format_production_for_table, 
-                   format_production_for_chartjs)
+                   format_production_for_chartjs, get_production_years)
 
 
 
@@ -38,9 +38,11 @@ def show_solar_details():
 
     #get production data by year. This will be a dictionary.
     production_by_year = format_production_for_table()
+    years = get_production_years()
 
     return (render_template("data_viz.html",\
-            production_by_year = production_by_year))
+            production_by_year = production_by_year,\
+            years = years))
 
 
 @app.route("/data_viz/all_production")
@@ -54,6 +56,14 @@ def show_all_production():
     yearly_labels, production_datasets = format_production_for_chartjs()
 
     return jsonify({'labels_by_year': yearly_labels, 'yearly_datasets': production_datasets})
+
+
+@app.route("/data_viz/<int:year>")
+def user_detail(year):
+    """Show info about user."""
+
+    selected_year = year
+    return render_template("year.html",  year = selected_year)
 
 
 # in future update routes to GET and POST methods and pass data in to javascript

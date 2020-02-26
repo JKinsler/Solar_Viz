@@ -53,6 +53,24 @@
 <div id="site content">
   <p>Practicing a bar chart with dates in Chart.js</p>
   <canvas id="bar-chart2"></canvas>
+  <h4>Congratulations Johanna on getting Chart.js to work!!!</h4>
+</div>
+
+<div>
+  <h2>Want to know more?</h2>
+  <p>Click on a year to get more information</p>
+  <h4>Years available</h4>
+
+  <ul>
+    {% for year in years %}
+      <li>
+        <a href="/data_viz/{{ year }}">
+          {{ year }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  
 </div>
 
 {% endblock %}

@@ -39,15 +39,21 @@ def show_solar_details():
     #get production data by year. This will be a dictionary.
     production_by_year = format_production_for_table()
 
+    return (render_template("data_viz.html",\
+            production_by_year = production_by_year))
+
+
+@app.route("/data_viz/all_production")
+def show_all_production():
+    """Return all production data by year."""
+
+    
     #get production data by year. 
     # 'datasets' should be a list of dictionaries
     # 'labels' should be a list
-    yearly_labels_json, production_datasets_json = format_production_for_chartjs()
+    yearly_labels, production_datasets = format_production_for_chartjs()
 
-    return (render_template("data_viz.html",\
-            production_by_year = production_by_year,\
-            yearly_labels_json = yearly_labels_json, \
-            production_datasets_json = production_datasets_json))
+    return jsonify({'labels_by_year': yearly_labels, 'yearly_datasets': production_datasets})
 
 
 # in future update routes to GET and POST methods and pass data in to javascript

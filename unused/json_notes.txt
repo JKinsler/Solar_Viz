@@ -1,0 +1,62 @@
+# JSON ########################################################################
+Lecture notes: https://fellowship.hackbrightacademy.com/materials/ft29a/lectures/apis/
+
+
+JSON rules
+    - strings require double quotes
+
+HELPFUL JSON FUNCTIONS
+json.loads() loads JSON from a given string (‘s’ is for string)
+
+json.dumps(your_dict) converts a dictionary to a JSON string (‘s is for string’)
+
+json.load(open(‘file.json’)) loads JSON from a file
+
+json.dump(your_dict, open(‘file.json’, ‘w’)) writes a dictionary to a JSON file
+
+jsonify - python
+JSON.stringify(variable) - javascript
+JSON.parse(variable) - happens in the html file or javascript file
+    - can then call key/value pairs as an object
+
+    loop through a parsed list in html: 
+
+    <ul id = "things"></ul>
+
+    <script>
+    var output = '';
+    for(let i = 0; i<listName.length; i++){
+        // console.log(listName[i].propertyName);
+
+        output += '<li>' + listName[i].propertyName + '</li>'
+    }
+
+    </script>
+
+
+GETTING JSON INFORMATON
+
+> import requests
+
+>>> res = requests.get('https://itunes.apple.com/search?term=honeydew')
+
+>>> res
+<Response [200]>
+
+
+ search_results = res.json()
+
+>>> search_results
+{'resultCount': 50, 'results': [{'wrapperType': 'track', 'kind': 'song',
+'artistId': 283721427, 'collectionId': 573079068, 'trackId': 573079488,
+'artistName': 'Never Shout Never', 'collectionName': 'Indigo', 'trackName':
+'Honey-Dew', 'collectionCensoredName': 'Indigo', 'trackCensoredName':
+'Honey-Dew', ... }
+
+
+>>> payload = {'term': 'wow very long',
+...            'filter': 'very long'}
+
+>>> req = requests.get('https://fakeapi.code/search', params=payload)
+>>> print(req.url)
+https://fakeapi.code/search?term=wow+very+long&filter=very+long&user=whoa+dudette

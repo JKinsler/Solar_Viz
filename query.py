@@ -122,26 +122,51 @@ def format_production_for_table():
     return production_by_year_dict
 
 
+def convert_date_to_iso(date_year):
+    """reformat a year so that is it an iso standard date, which is required
+    for chartjs
+    This function takes the argument date_year as a string parameter.
+
+    Code that works:
+    >>> year_info = '2016'
+    >>> year_format = "%Y"
+
+    >>> from datetime import datetime
+    >>> year_date = datetime.strptime(year_info, year_format)
+    >>> year_date
+    datetime.datetime(2016, 1, 1, 0, 0)
+    >>> year_date.isoformat()
+    '2016-01-01T00:00:00'
+    >>>
+
+    """
+
+    year_format = "%Y"
+    date_year_datetime = datetime.strptime(date_year, year_format)
+    
+    return date_year_datetime.isoformat()
+
+
 def format_production_for_chartjs():
-    """Re-format get_production_by_year output so it's compatible with  jinja 
-    table."""
+    """Re-format get_production_by_year output so it's compatible with chartjs
+    and javascript."""
 
     production_by_year = get_production_by_year()
 
     production_datasets = []
     yearly_labels = []
     for year in production_by_year:
-        yearly_labels.append(str(int(year[0])))
+        yearly_labels.append(convert_date_to_iso(str(int(year[0]))))
         
         yearly_dataset = {}
-        yearly_dataset["x"] = str(int(year[0]))
+        yearly_dataset["x"] = convert_date_to_iso(str(int(year[0])))
         yearly_dataset["y"] = float(year[1]/1000)
         production_datasets.append(yearly_dataset)
 
-    yearly_labels_json = json.dumps(yearly_labels)
-    production_datasets_json = json.dumps(production_datasets)
+    # yearly_labels_json = json.dumps(yearly_labels)
+    # production_datasets_json = json.dumps(production_datasets)
 
-    return yearly_labels_json, production_datasets_json
+    return yearly_labels, production_datasets
 
 
 def get_consumption_values():

@@ -51,82 +51,16 @@
 <h2>Yearly Production Data for All Utilities - chart.js</h2>
 
 <div id="site content">
- <!--  <p>1. Practicing a basic bar chart with Chart.js</p>
-  <canvas id="basic-bar-chart"></canvas> -->
-
   <p>Practicing a bar chart with dates in Chart.js</p>
   <canvas id="bar-chart2"></canvas>
-  
-  <!-- <p>3. Practicing a bar chart with solar data in Chart.js</p>
-  <canvas id="bar-chart3"></canvas>
-
-  <p>4. Practicing a bar chart with solar data in Chart.js</p>
-  <canvas id="bar-chart4"></canvas> -->
 </div>
 
 {% endblock %}
 
 
 {% block js %}
-<!-- <script src="/static/js/basic_bar_chart.js"></script> -->
-<!-- <script src="/static/js/bar-chart-two.js"></script> -->
-<!-- <script src="/static/js/bar_chart-three.js"></script> -->
-<!-- <script src="/static/js//bar_chart4.js"></script> -->
+<script src="/static/js/bar-chart-five.js"></script>
 
-<script>
-
-const yearly_labels = ["2007", "2011", "2014", "2015", "2016", "2018", "2019"]
-const yearly_datasets = [{"x": "2007", "y": 151.24}, {"x": "2011", "y": 22.302}, {"x": "2014", "y": 0.301}, {"x": "2015", "y": 6.49}, {"x": "2016", "y": 103.458}, {"x": "2018", "y": 62.918}, {"x": "2019", "y": 18.356}]
-
-
-const barChartTwo = new Chart(
-  $('#bar-chart2'),
-  {
-    type: 'bar',
-    data: {
-      labels: yearly_labels,
-      datasets: [
-        {
-          label: 'Annual Solar Energy Generation (GWh)',
-          data: yearly_datasets
-        },
-      ]
-    },
-    options: {
-      datasets: {
-        bar: {
-          // We use a function to automatically set the background color of
-          // each bar in the bar chart.
-          //
-          // There are many other properties that accept functions. For more
-          // information see: https://www.chartjs.org/docs/latest/general/options.html#scriptable-options
-          backgroundColor: () => {
-            // `randomColor` is a JS module we found off GitHub: https://github.com/davidmerfield/randomColor
-            // We imported it in templates/chartjs.html
-            return randomColor();
-          }
-        }
-      },
-      scales: {
-            xAxes: [{
-                type: 'time',
-                time: {
-                    unit: 'year'
-                }
-            }],
-            yAxes: [
-          {
-            ticks: {
-              min: 0,
-              max: 200
-            }
-          },
-        ]
-        }
-    }
-  }
-);
-</script>
 
 {% endblock %}
 

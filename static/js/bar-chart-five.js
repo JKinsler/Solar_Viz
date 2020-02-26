@@ -1,27 +1,26 @@
 "use strict";
 
-// const selectedId = $('#human-id').val();
 
-// $.get('/data_viz/', (res) => {
-//     const yearlyLabels = res.labels;
-//     const yearlyDatasets = res.datasets
-//     });
+$.get('/data_viz/all_production', (res) => {
+  // Make a bar chart with all yearly production data. 
 
-const barChartTwo = new Chart(
+  // Get years of production. 
+  const yearly_labels = res.labels_by_year;
+  // Get production data that corresponds with each year
+  const yearly_datasets_list = res.yearly_datasets;
+
+  // Create a chart 
+  const barChartFive = new Chart(
   $('#bar-chart2'),
   {
     type: 'bar',
     data: {
-      labels: [ new Date('2015'), new Date('2016'), new Date('2017'), new Date('2018'), new Date('2019')],
+      labels: yearly_labels,
       datasets: [
         {
-          label: 'Today',
-          data: [{x: new Date('2016'), y: 1500}, {x: new Date('2017'), y:3600},{ x: new Date('2018'), y:2700}]
+          label: 'Annual Solar Energy Generation (GWh)',
+          data: yearly_datasets_list
         },
-        {
-          label: 'Yesterday',
-          data: [{ x: new Date('2016'), y:5500} , { x: new Date('2017'), y:4000} , { x: new Date('2018'), y:7300}]
-        }
       ]
     },
     options: {
@@ -50,7 +49,7 @@ const barChartTwo = new Chart(
           {
             ticks: {
               min: 0,
-              max: 10000
+              max: 200
             }
           },
         ]
@@ -58,4 +57,6 @@ const barChartTwo = new Chart(
     }
   }
 );
+});
+
 

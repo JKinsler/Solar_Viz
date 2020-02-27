@@ -8,5 +8,39 @@
 
 <h2>Solar energy production details for {{year}}:</h2>
 
+<div id="production-consumption">
+    <p>REPLACE TABLE WITH A PIE CHART</p>
+    <table class="showing_solar_data" id="PCC">
+    <tr>
+      <th>
+          production
+      </th>
+      <th>
+          consumption
+      </th>
+      <th>
+          % solar
+      </th>
+    </tr>
+    <tr>
+      <td>
+        {{ production }} kWh
+      </td>
+      <td>
+        consumption kWh
+      </td>
+      <td>
+        percent kWh
+      </td>
+    </tr>
+  </table>
+    
+</div>
 
+
+{% endblock %}
+
+
+{% block js %}
+<!-- scripts go here -->
 {% endblock %}

@@ -123,9 +123,18 @@ def get_production_years():
 
 
 def format_production_for_table():
-    """Re-format get_production_by_year output so it's compatible with  jinja 
-    table.
-    Used in server.py"""
+    """Returns a dictionary with key value pairs as 'year':'production'.
+    
+    key types are 'int'
+    value types are 'int'
+   
+    Used in server.py
+
+    Example (from 'solar_viz_test' database):
+    
+    >>> print(format_production_for_table())
+    {2007: 151240, 2011: 22302, 2014: 301, 2015: 6490, 2016: 103458, 2018: 62918, 2019: 18356}
+    """
 
     production_by_year = get_production_by_year()
 
@@ -137,19 +146,12 @@ def format_production_for_table():
 
 
 def convert_date_to_iso(date_year):
-    """reformat a year so that is it an iso standard date, which is required
+    """Convert a 4-digit year iso standard date, which is required
     for chartjs
     This function takes the argument date_year as a string parameter.
 
-    Code that works:
-    >>> year_info = '2016'
-    >>> year_format = "%Y"
-
-    >>> from datetime import datetime
-    >>> year_date = datetime.strptime(year_info, year_format)
-    >>> year_date
-    datetime.datetime(2016, 1, 1, 0, 0)
-    >>> year_date.isoformat()
+    Example (from 'solar_viz_test' database):
+    >>> convert_date_to_iso('2016')
     '2016-01-01T00:00:00'
     >>>
 
@@ -182,6 +184,37 @@ def format_production_for_chartjs():
 
     return yearly_labels, production_datasets
 
+
+def get_production_for_year(year):
+    """Return the amount of energy produced from a particular year.
+    Input 'year' is taken as a string or int
+    Output will be production, as an int
+    
+    WORKING CODE
+
+    used in server.py
+
+    Example 1: (from 'solar_viz_test' database):
+    >>> print(get_production_for_year('2016'))
+    103458
+
+    Example 2:
+    >>> print(get_production_for_year(2016))
+    103458
+
+    Example 3:
+    >>> print(get_production_for_year(1990))
+    None
+
+    """
+    year_int = int(year)
+    production_by_year_dict = format_production_for_table()
+    
+    if year_int in production_by_year_dict:
+        return production_by_year_dict[year_int]
+    else:
+        return None
+    
 
 def get_consumption_values():
     """Return the energy consumption value for all companies in all date ranges.

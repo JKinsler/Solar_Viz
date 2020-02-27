@@ -9,7 +9,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import (Company, Program, Production, Consumption, connect_to_db, db)
 
 from query import (get_production_by_year, format_production_for_table, 
-                   format_production_for_chartjs, get_production_years)
+                   format_production_for_chartjs, get_production_years, 
+                   get_production_for_year)
 
 
 
@@ -62,8 +63,11 @@ def show_all_production():
 def user_detail(year):
     """Show info about user."""
 
-    selected_year = year
-    return render_template("year.html",  year = selected_year)
+    
+    production = get_production_for_year(year)
+
+    return render_template("year.html",  year = year,\
+                            production = production)
 
 
 # in future update routes to GET and POST methods and pass data in to javascript

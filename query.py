@@ -369,13 +369,88 @@ def check_application_id(application_id):
 """joined load database tests"""
 def get_company_application(search_company_name):
     """Return the application id for the company which is input as a parameter.
-    working code"""
+    working code
+
+    Example (from 'solar_viz_test' database): 
+    >>> print(get_company_application('Pacific Gas and Electric'))
+    [<Program application_id=SD-CSI-00001
+                       utility=1
+                       city=San Diego
+                       county=San Diego
+                       zipcode=92121
+                       contractor=4
+                       pv_manuf=11
+                       invert_manuf=18
+                       status=Installed>, <Program application_id=SCE-CSI-06676
+                       utility=2
+                       city=Manhattan Beach
+                       county=Los Angeles
+                       zipcode=90266
+                       contractor=5
+                       pv_manuf=12
+                       invert_manuf=19
+                       status=Installed>, 
+                       ... AND MORE RETURNED BUT TRUNCATED
+
+        """
 
     applications = Program.query.filter(Company.name == search_company_name)\
                                 .options(db.joinedload('utility_company'))\
                                 .all()
 
     return applications
+
+
+def get_production_from_utility_by_years(search_company_name):
+    """Return the production from a utility company for all years
+
+    Used in server.py.
+
+    Example (from 'solar_viz_test' database): 
+    
+    >>> get_production_from_company_by_years('Pacific Gas and Electric')
+    [(2015.0, Decimal('5666'), 'Pacific Gas and Electric'), (2016.0, Decimal('103458'), 
+    'Pacific Gas and Electric')]
+
+
+    To help with debugging: get_production_from_company_by_years('Pacific Gas and Electric')"""
+    
+    company_production_by_year = db.session.query\
+                (extract('year', Production.end_date).label('year'),\
+                func.sum(Production.produced).label('total'),\
+                Company.name)\
+                .join(Program, Production.application_id == Program.application_id)\
+                .join(Company, Program.utility == Company.company_id)\
+                .filter(Company.name == search_company_name)\
+                .group_by(extract('year', Production.end_date))\
+                .group_by(Company.name)\
+                .order_by(extract('year', Production.end_date))\
+                .all()
+
+    return company_production_by_year
+
+
+def get_utility_names():
+    """Return a list of all the utilities in the companies table.
+    
+    Example (from 'solar_viz_test' database): 
+
+    >>> get_utility_names()
+    ['San Diego Gas and Electric', 'Southern California Edison', 'Pacific Gas and Electric']
+
+    """
+    
+    utilities = Company.query.filter(Company.company_type == 'Utility and Energy Producer').all()
+    utilities_list = []
+    for utility in utilities:
+        utilities_list.append(utility.name)
+    
+    return utilities_list
+
+
+def get_production_from_utilities_from_a_year(year):
+
+    
 
 ###############################################################################
 #helper functions

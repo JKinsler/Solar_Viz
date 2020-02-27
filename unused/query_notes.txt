@@ -54,3 +54,52 @@ production_by_year = db.session.query(extract('year', Production.end_date), func
 
 >>> production_by_year
 [(2007.0, Decimal('151240')), (2011.0, Decimal('22302')), (2014.0, Decimal('301')), (2015.0, Decimal('6490')), (2016.0, Decimal('103458')), (2018.0, Decimal('62918')), (2019.0, Decimal('18356'))]
+
+
+MAKING A QUERY FOR get_production_from_company_by_years(search_company_name) - This code works
+
+SELECT company_id, application_id
+FROM programs
+JOIN companies
+ON programs.utility = companies.company_id
+solar_viz_test-# WHERE companies.name = 'Pacific Gas and Electric';
+ company_id | application_id
+------------+----------------
+          3 | PGE-CSI-35695
+          3 | PGE-CSI-63815
+
+(2 rows)
+
+              ^
+Earlier query - doesn't work
+
+SELECT productions.date_part('year', end_date) AS year, SUM(productions.produced) AS yearly_production, companies.name
+FROM productions
+JOIN programs
+ON productions.application_id = programs.application_id
+GROUP BY date_part('year', end_date)
+
+UNION ALL
+
+SELECT company_id, application_id
+FROM programs
+JOIN companies
+ON programs.utility = companies.company_id
+WHERE companies.name = 'Pacific Gas and Electric';
+
+
+
+Latest query - doesn't work
+
+FROM productions
+JOIN programs
+ON productions.application_id = programs.application_id
+GROUP BY date_part('year', end_date)
+UNION ALL
+SELECT companies.company_id , programs.application_id
+FROM programs
+JOIN companies
+ON programs.utility = companies.company_id
+WHERE companies.name = 'Pacific Gas and Electric';
+ERROR:  UNION types numeric and character varying cannot be matched
+LINE 7: SELECT companies.company_id , programs.application_id

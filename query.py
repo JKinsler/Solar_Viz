@@ -214,7 +214,23 @@ def get_production_for_year(year):
         return production_by_year_dict[year_int]
     else:
         return None
+
+
+def get_production_percent_change(year):
+    """Return the % change in production since the previous year
+
+    Input: Year can be entered as an int or string
+    Output: percent_change will be a float with two decimal points
+
+    CODE DOES NOT OUTPUT WHAT I WANT IT TO. NEED TO FIX THE PERCENTAGES"""
     
+    year = int(year)
+    previous_year = year - 1
+    print(previous_year)
+    percent_change = round((get_production_for_year(year)/get_production_for_year(previous_year)*100), 2)
+    print(percent_change)
+    return percent_change
+
 
 def get_consumption_values():
     """Return the energy consumption value for all companies in all date ranges.
@@ -234,14 +250,62 @@ def get_consumption_values():
     return total_consumption
 
 
-def get_percent_solar():
-    """returns the percentage energy of solar in production in comparison with total consumption.
-    non working code."""
+def get_consumption_by_year():
+    """Return the energy consumption value for the year which is given as an input.
 
-    total_production = get_production_values()
-    total_consumption = get_consumption_values()
+    Output: list of tuples that contain (year, consumed)
+    'year' is returned as str
+    'consumed' is returned as Decimal
 
-    percent_solar = total_production / total_consumption
+    working code
+
+    used by query.py
+
+    Example (from 'solar_viz_test' database):
+    print(get_consumption_by_year())
+    [('2003', Decimal('82187501000')), ('2004', Decimal('165991784420')), 
+    ('2005', Decimal('168176982210')), ('2006', Decimal('173128734110')), 
+    ('2007', Decimal('195208993470')), ('2008', Decimal('197699316250')), 
+    ('2009', Decimal('106050234170')), ('2010', Decimal('102752303400')), 
+    ('2011', Decimal('103375578300')), ('2012', Decimal('20107762330')), 
+    ('2013', Decimal('19908245100')), ('2014', Decimal('20166788140')), 
+    ('2015', Decimal('19767120550'))]
+
+    """
+
+    all_consumption = db.session.query(Consumption.year.label('year'), 
+                                        func.sum(Consumption.consumed).label('total'))\
+                                        .group_by(Consumption.year)\
+                                        .order_by(Consumption.year)\
+                                        .all()
+    return all_consumption
+
+
+def get_consumption_from_year(input_year):
+    """Return the energy consumption value from a particular year, which is 
+    given as an input.
+
+    Example (from 'solar_viz_test' database):
+    >>> print(get_consumption_from_year(2008))
+    197699316250"""
+
+    search_year = str(input_year) 
+    all_consumption = get_consumption_by_year()
+
+    for pair in all_consumption:
+        if pair[0] == search_year:
+            production = pair[1]
+            return production
+            
+
+def get_percent_solar_by_year(year):
+    """return the percentage energy of solar in production in comparison with total consumption.
+    ."""
+
+    production = get_production_for_year(year)
+    consumption = get_consumption_from_year(year)
+
+    percent_solar = round(float(production / consumption), 2)
 
     return percent_solar
     

@@ -10,7 +10,8 @@ from model import (Company, Program, Production, Consumption, connect_to_db, db)
 
 from query import (get_production_by_year, format_production_for_table, 
                    format_production_for_chartjs, get_production_years, 
-                   get_production_for_year)
+                   get_production_for_year, get_consumption_from_year,
+                   get_percent_solar_by_year)
 
 
 
@@ -65,9 +66,13 @@ def user_detail(year):
 
     
     production = get_production_for_year(year)
+    consumption = get_consumption_from_year(year)
+    percent = get_percent_solar_by_year(year)
 
     return render_template("year.html",  year = year,\
-                            production = production)
+                            production = production, \
+                            consumption = consumption, \
+                            percent = percent)
 
 
 # in future update routes to GET and POST methods and pass data in to javascript

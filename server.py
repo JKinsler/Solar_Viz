@@ -11,7 +11,8 @@ from model import (Company, Program, Production, Consumption, connect_to_db, db)
 from query import (get_production_by_year, format_production_for_table, 
                    format_production_for_chartjs, get_production_years, 
                    get_production_for_year, get_consumption_from_year,
-                   get_percent_solar_by_year, all_utilities_production_for_a_year)
+                   get_percent_solar_by_year, all_utilities_production_for_a_year, 
+                   get_utilities_consumption_in_year)
 
 
 
@@ -83,9 +84,12 @@ def compare_companies(year):
 
     #information for utilities bar chart
     utilities, production_values = all_utilities_production_for_a_year(year)
+    utilities2, consumption_values = get_utilities_consumption_in_year(year)
 
 
-    return jsonify({'labels_utilities': utilities}, {'yearly_datasets': production_values})
+    return jsonify({'labels_utilities': utilities,
+                   'year_productions': production_values, 
+                   'year_consumptions': consumption_values})
 
 # in future update routes to GET and POST methods and pass d
 # may need to update data type to be better for chart.js

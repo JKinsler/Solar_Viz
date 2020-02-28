@@ -158,11 +158,13 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PstgreSQL database
+    
     # connect to the production database
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz'
 
     # connect to the test database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz_test'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz_test'
+    
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)

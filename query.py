@@ -167,13 +167,16 @@ def format_production_for_chartjs():
     """Re-format get_production_by_year output so it's compatible with chartjs
     and javascript.
 
+    Example (from solar_viz_test database):
 
-format_production_for_chartjs()
-(['2007-01-01T00:00:00', '2011-01-01T00:00:00', '2014-01-01T00:00:00', '2015-01-01T00:00:00', '2016-01-01T00:00:00', '2018-01-01T00:00:00', '2019-01-01T00:00:00'], 
-[{'x': '2007-01-01T00:00:00', 'y': 151.24}, {'x': '2011-01-01T00:00:00', 'y': 22.302}, 
-{'x': '2014-01-01T00:00:00', 'y': 0.301}, {'x': '2015-01-01T00:00:00', 'y': 6.49}, 
-{'x': '2016-01-01T00:00:00', 'y': 103.458}, {'x': '2018-01-01T00:00:00', 'y': 62.918}, 
-{'x': '2019-01-01T00:00:00', 'y': 18.356}])
+    format_production_for_chartjs()
+    (['2007-01-01T00:00:00', '2011-01-01T00:00:00', '2014-01-01T00:00:00', '2015-01-01T00:00:00', '2016-01-01T00:00:00', '2018-01-01T00:00:00', '2019-01-01T00:00:00'], 
+    [{'x': '2007-01-01T00:00:00', 'y': 151.24}, {'x': '2011-01-01T00:00:00', 'y': 22.302}, 
+    {'x': '2014-01-01T00:00:00', 'y': 0.301}, {'x': '2015-01-01T00:00:00', 'y': 6.49}, 
+    {'x': '2016-01-01T00:00:00', 'y': 103.458}, {'x': '2018-01-01T00:00:00', 'y': 62.918}, 
+    {'x': '2019-01-01T00:00:00', 'y': 18.356}])
+    
+    used by server.py    
     """
 
     production_by_year = get_production_by_year()
@@ -290,9 +293,63 @@ def get_consumption_by_year():
     return all_consumption
 
 
+def get_consumption_for_utility_in_year(search_company_name, search_year):
+    """Return the energy consumption value for a utility company, in year 
+    which is given as an input.
+
+    Input: 
+        - utilities, as a list
+        - year, as an int or string
+    Output: 
+        - utility name
+        - consumption as a float, in kWh
+    
+    Example (from 'solar_viz_test' database):
+    >>> get_consumption_for_utility_in_year('Pacific Gas and Electric', 2007)
+    [(86078891490, '2007', 'Pacific Gas and Electric')]
+    
+    used by server.py
+    """
+    search_year = str(search_year) 
+
+    company_consumption = db.session.query(Consumption.consumed, Consumption.year, Company.name)\
+                                    .join(Company, Consumption.utility == Company.company_id)\
+                                    .filter(Company.name == search_company_name)\
+                                    .filter(Consumption.year == search_year)\
+                                    .all()
+    return company_consumption
+
+
+def get_utilities_consumption_in_year(search_year):
+    """Return a list of consumption values that corresponds with a list of
+    utilties for a year.
+
+    Input: Year | as int or str
+    Output: Utility names, as a list
+    Output: Consumption values, in gWh
+
+    Example (from 'solar_viz_test' database):
+    
+    >>> get_utilities_consumption_in_year(2007)
+    (['San Diego Gas and Electric', 'Southern California Edison', 'Pacific Gas and Electric'], [20324710.98, 88805391.0, 86078891.49])
+
+    Used by server.py"""
+    
+    search_year = str(search_year)
+    utilities = get_utility_names()
+    consumption_values = []
+
+    for utility in utilities:
+        utility_consumption = get_consumption_for_utility_in_year(utility, search_year)
+        utilities_consumption_gWh = float(utility_consumption[0][0])/1000
+        consumption_values.append(utilities_consumption_gWh)
+
+    return utilities, consumption_values
+
+
 def get_consumption_from_year(input_year):
     """Return the energy consumption value from a particular year, which is 
-    given as an input
+    given as an inpu. The return value is a total of all companies.
 
     Returns consumption, as an float in gWh.
 
@@ -454,9 +511,11 @@ def get_utility_names():
     """
     
     utilities = Company.query.filter(Company.company_type == 'Utility and Energy Producer').all()
+
     utilities_list = []
     for utility in utilities:
-        utilities_list.append(utility.name)
+        if utility.name != 'GRID Alternatives':
+            utilities_list.append(utility.name)
     
     return utilities_list
 

@@ -49,7 +49,7 @@ $.get('/data_viz/all_production', (res) => {
           {
             ticks: {
               min: 0,
-              max: 200
+              // max: 200
             }
           },
         ]

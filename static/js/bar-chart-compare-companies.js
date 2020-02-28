@@ -1,4 +1,6 @@
 "use strict";
+
+const year = $('#production-consumption').data('year');
 console.log(year);
 
 $.get(`/data_viz/${year}/compare_companies`, (res) => {
@@ -7,7 +9,12 @@ $.get(`/data_viz/${year}/compare_companies`, (res) => {
   // Get utilities list. 
   const utility_labels = res.labels_utilities;
   // Get production data that corresponds with each company
-  const data_list = res.yearly_datasets;
+  const production_data_list = res.year_productions;
+  const consumption_data_list = res.year_consumptions;
+
+  console.log(utility_labels)
+  console.log(production_data_list)
+  console.log(consumption_data_list)
 
    const colorfulBarChart = new Chart(
     $('#bar-chart-compare-companies2'),
@@ -18,11 +25,11 @@ $.get(`/data_viz/${year}/compare_companies`, (res) => {
         datasets: [
           {
             label: 'Solar energy production (gWh)',
-            data: data_list
+            data: production_data_list
           },
           {
-            label: 'Yesterday',
-            data: [5, 0, 7]
+            label: 'Total energy production/consumption (gWh)',
+            data: consumption_data_list
           }
         ]
       },
@@ -50,7 +57,7 @@ $.get(`/data_viz/${year}/compare_companies`, (res) => {
             {
               ticks: {
                 min: 0,
-                max: 200
+                // max: 100000000
               }
             },
           ]

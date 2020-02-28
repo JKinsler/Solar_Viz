@@ -8,7 +8,7 @@
 
 <h2>Solar energy production details for {{year}}:</h2>
 
-<div id="production-consumption">
+<div id="production-consumption" data-year="{{ year }}">
     <p>REPLACE TABLE WITH A PIE CHART?</p>
     <table class="showing_solar_data" id="PCC">
         <tr>
@@ -36,7 +36,7 @@
     </table>
     <p>Solar Energy Production changed by {{ percent }} &#37 from the previous year. </p>
 </div>
-<script>const year = {{ year }}</script>
+
 <div id="site content">
   <p>Solar production values from all CSI companies for {{year}}:</p>
   <canvas id="bar-chart-compare-companies2"></canvas>

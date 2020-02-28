@@ -156,7 +156,7 @@ def convert_date_to_iso(date_year):
     >>>
 
     """
-
+    date_year = str(date_year)
     year_format = "%Y"
     date_year_datetime = datetime.strptime(date_year, year_format)
     
@@ -165,7 +165,16 @@ def convert_date_to_iso(date_year):
 
 def format_production_for_chartjs():
     """Re-format get_production_by_year output so it's compatible with chartjs
-    and javascript."""
+    and javascript.
+
+
+format_production_for_chartjs()
+(['2007-01-01T00:00:00', '2011-01-01T00:00:00', '2014-01-01T00:00:00', '2015-01-01T00:00:00', '2016-01-01T00:00:00', '2018-01-01T00:00:00', '2019-01-01T00:00:00'], 
+[{'x': '2007-01-01T00:00:00', 'y': 151.24}, {'x': '2011-01-01T00:00:00', 'y': 22.302}, 
+{'x': '2014-01-01T00:00:00', 'y': 0.301}, {'x': '2015-01-01T00:00:00', 'y': 6.49}, 
+{'x': '2016-01-01T00:00:00', 'y': 103.458}, {'x': '2018-01-01T00:00:00', 'y': 62.918}, 
+{'x': '2019-01-01T00:00:00', 'y': 18.356}])
+    """
 
     production_by_year = get_production_by_year()
 
@@ -283,18 +292,22 @@ def get_consumption_by_year():
 
 def get_consumption_from_year(input_year):
     """Return the energy consumption value from a particular year, which is 
-    given as an input.
+    given as an input
+
+    Returns consumption, as an float in gWh.
 
     Example (from 'solar_viz_test' database):
-    >>> print(get_consumption_from_year(2008))
-    197699316250"""
+
+    >>> get_consumption_from_year(2008)
+    197699316.25
+    """
 
     search_year = str(input_year) 
     all_consumption = get_consumption_by_year()
 
     for pair in all_consumption:
         if pair[0] == search_year:
-            production = pair[1]
+            production = float(pair[1])/1000
             return production
             
 
@@ -448,9 +461,56 @@ def get_utility_names():
     return utilities_list
 
 
-def get_production_from_utilities_from_a_year(year):
-
+def utility_production_for_a_year(utility, search_year):
+    """Get the production for a utility, for a particular year.
     
+    Input:
+        utiity: company name, as a string, which must match the companies database
+        search_year: year, as an int or str
+    Output: production, as a float, gWh
+    
+    Example (from 'solar_viz_test' database): 
+
+    >>> utility_production_for_a_year('Pacific Gas and Electric', 2016)
+    103
+    
+    Used by server.py
+    """
+
+    search_year = float(search_year)
+    years = get_production_from_utility_by_years(utility)
+
+    for year in years:
+        if search_year == year[0]:
+            return float(year[1]/1000)
+
+def all_utilities_production_for_a_year(year):
+    """Returns a list of production values that correspond with the utilities in a year.
+
+    Input: year value as str or int
+    Output: 
+        - list of utillities
+        - list of production values, as floats, in gWh
+
+    Example (from 'solar_viz_test' database):
+    >>> all_utilities_production_for_a_year(2016)
+    (['San Diego Gas and Electric', 'Southern California Edison', 'Pacific Gas and Electric'], 
+    [None, None, 103.458])
+
+    Used in server.py
+    """
+    
+    year = int(year)
+    utilities = get_utility_names()
+    production_values = []
+    for utility in utilities:
+        production_value = utility_production_for_a_year(utility, year)
+        production_values.append(production_value)
+
+    return utilities, production_values
+
+
+  
 
 ###############################################################################
 #helper functions

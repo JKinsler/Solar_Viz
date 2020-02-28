@@ -13,10 +13,10 @@
     <table class="showing_solar_data" id="PCC">
         <tr>
           <th>
-              production
+              production (gWh)
           </th>
           <th>
-              consumption
+              consumption (gWh)
           </th>
           <th>
               &#37 solar
@@ -35,45 +35,17 @@
         </tr>
     </table>
     <p>Solar Energy Production changed by {{ percent }} &#37 from the previous year. </p>
-
 </div>
-<div>
-    <h2>Top companies from {{year}}</h2>
-    <h4>Comparison of utility production and consumption</h4>
-    <table class="showing_solar_data" id="PCC">
-        <tr>
-          <th>
-              utility
-          </th>
-          <th>
-              production
-          </th>
-          <th>
-              consumption
-          </th>
-          <th>
-              &#37 solar
-          </th>
-        </tr>
-        <tr>
-          <td>
-            production kWh
-          </td>
-          <td>
-            consumption kWh
-          </td>
-          <td>
-            percent &#37
-          </td>
-        </tr>
-    </table>
-
+<script>const year = {{ year }}</script>
+<div id="site content">
+  <p>Solar production values from all CSI companies for {{year}}:</p>
+  <canvas id="bar-chart-compare-companies2"></canvas>
+  <!-- <h4>Congratulations Johanna on getting Chart.js to work again!!!</h4> -->
 </div>
-
 
 {% endblock %}
 
 
 {% block js %}
-<!-- scripts go here -->
+<script src="/static/js/bar-chart-compare-companies.js"></script>
 {% endblock %}

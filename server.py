@@ -11,7 +11,7 @@ from model import (Company, Program, Production, Consumption, connect_to_db, db)
 from query import (get_production_by_year, format_production_for_table, 
                    format_production_for_chartjs, get_production_years, 
                    get_production_for_year, get_consumption_from_year,
-                   get_percent_solar_by_year)
+                   get_percent_solar_by_year, all_utilities_production_for_a_year)
 
 
 
@@ -61,13 +61,15 @@ def show_all_production():
 
 
 @app.route("/data_viz/<int:year>")
-def user_detail(year):
-    """Show info about user."""
+def show_year(year):
+    """Show info about the year."""
 
-    
+
+    #information for table
     production = get_production_for_year(year)
     consumption = get_consumption_from_year(year)
     percent = get_percent_solar_by_year(year)
+
 
     return render_template("year.html",  year = year,\
                             production = production, \
@@ -75,7 +77,17 @@ def user_detail(year):
                             percent = percent)
 
 
-# in future update routes to GET and POST methods and pass data in to javascript
+@app.route("/data_viz/<int:year>/compare_companies")
+def compare_companies(year):
+    """Show info about the companies from the year."""
+
+    #information for utilities bar chart
+    utilities, production_values = all_utilities_production_for_a_year(year)
+
+
+    return jsonify({'labels_utilities': utilities}, {'yearly_datasets': production_values})
+
+# in future update routes to GET and POST methods and pass d
 # may need to update data type to be better for chart.js
 
 #DUNDER NAME #########################

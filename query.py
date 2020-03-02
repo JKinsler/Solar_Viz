@@ -61,8 +61,6 @@ def get_production_values():
 def get_production_by_year():
     """Return the solar production values by year
     Output will be a dictionary with year: production as key value pairs.
-    
-    WORKING CODE
 
     used in server.py
 
@@ -84,8 +82,10 @@ def get_production_by_year():
      2019 |             18356
     (7 rows)
     
-
-    resource: https://www.postgresqltutorial.com/postgresql-date_part/
+    Tests from solar_viz_test database
+    Examples: 
+        >>> get_production_by_year()
+        [(2007.0, Decimal('151240')), (2011.0, Decimal('22302')), (2014.0, Decimal('301')), (2015.0, Decimal('6490')), (2016.0, Decimal('103458')), (2018.0, Decimal('62918')), (2019.0, Decimal('18356'))]
     """
 
     production_by_year = db.session.query(\
@@ -96,11 +96,7 @@ def get_production_by_year():
                                         .order_by(extract('year', Production.end_date))\
                                         .all()
     
-    # example of query output, based on seed_test productions table: 
-    # [(2011.0, Decimal('22302')), (2015.0, Decimal('6490')), 
-    # (2007.0, Decimal('151240')), (2019.0, Decimal('18356')), 
-    # (2016.0, Decimal('103458')), (2014.0, Decimal('301')), 
-    # (2018.0, Decimal('62918'))]
+
 
 
     # format the output of the query into a dictionary
@@ -125,15 +121,16 @@ def get_production_years():
 def format_production_for_table():
     """Returns a dictionary with key value pairs as 'year':'production'.
     
-    key types are 'int'
-    value types are 'int'
+    Output: dictionary
+        - key types are 'int'
+        - value types are 'int'
    
     Used in server.py
 
-    Example (from 'solar_viz_test' database):
-    
-    >>> print(format_production_for_table())
-    {2007: 151240, 2011: 22302, 2014: 301, 2015: 6490, 2016: 103458, 2018: 62918, 2019: 18356}
+    (tests from 'solar_viz_test' database)
+    Examples:
+        >>> format_production_for_table()
+        {2007: 151240, 2011: 22302, 2014: 301, 2015: 6490, 2016: 103458, 2018: 62918, 2019: 18356}
     """
 
     production_by_year = get_production_by_year()
@@ -150,12 +147,13 @@ def convert_date_to_iso(date_year):
     for chartjs
     This function takes the argument date_year as a string parameter.
 
-    Example (from 'solar_viz_test' database):
-    >>> convert_date_to_iso('2016')
-    '2016-01-01T00:00:00'
-    >>>
-
+    (test from 'solar_viz_test' database)
+    Example:
+        >>> convert_date_to_iso('2016')
+        '2016-01-01T00:00:00'
+        >>>
     """
+
     date_year = str(date_year)
     year_format = "%Y"
     date_year_datetime = datetime.strptime(date_year, year_format)

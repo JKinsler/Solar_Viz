@@ -154,16 +154,13 @@ class Consumption(db.Model):
 """Took helper functions from ratings lab. Need to understand this code 
 better."""
 
-def connect_to_db(app):
+def connect_to_db(app, database_name='postgresql:///solar_viz'):
     """Connect the database to our Flask app."""
 
     # Configure to use our PstgreSQL database
     
-    # connect to the production database
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz'
-
-    # connect to the test database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///solar_viz_test'
+    # # connect to the production database
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_name
     
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app

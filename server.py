@@ -13,7 +13,7 @@ from query import (get_production_by_year, format_production_for_table,
                    get_production_for_year, get_consumption_from_year,
                    get_percent_solar_by_year, all_utilities_production_for_a_year, 
                    get_utilities_consumption_in_year)
-
+from news import (get_google_news, create_search_url, parse_google_news_response)
 
 
 app = Flask(__name__)
@@ -39,6 +39,18 @@ def index():
 def show_solar_news():
     """Newsfeed page."""
     return render_template("solar_news.html")
+
+
+@app.route("/solar_news/news_feed")
+def get_news_feed_info():
+    """Show info about the companies from the year."""
+
+    #get variables I want to send
+    search_url, payload = create_search_url()
+    news_results = get_google_news(search_url, payload)
+
+
+    return jsonify(news_results)
 
 
 @app.route("/data_viz")

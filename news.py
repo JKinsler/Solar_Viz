@@ -105,7 +105,8 @@ def get_google_news(search_url, payload):
 
 
 def parse_google_news_response(news_results, i=0):
-    """Return parsed results of the google news request"""
+    """Return parsed results of the google news request.
+    Translate to javascript to use."""
 
     # get the value of the key 'status' from the response dictionary
     results_status = news_results['status']

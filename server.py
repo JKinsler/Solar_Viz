@@ -35,6 +35,12 @@ def index():
     return render_template("homepage.html")
 
 
+@app.route('/solar_news')
+def show_solar_news():
+    """Newsfeed page."""
+    return render_template("solar_news.html")
+
+
 @app.route("/data_viz")
 def show_solar_details():
     """Show data vizualization details."""

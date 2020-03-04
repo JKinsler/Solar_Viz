@@ -11,6 +11,7 @@ def get_oldest_article_date():
 
     # date = datetime.datetime.strptime(date, "%m/%d/%Y")
     today_date = datetime.date.today()
+    # last_week = today_date-TimeSpan(-7)
     search_date = today_date.isoformat()
 
     return search_date

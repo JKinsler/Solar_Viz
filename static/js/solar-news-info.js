@@ -9,12 +9,23 @@ const showArticles = (articles) => {
     const articleUrl = articles.url;
     const imageUrl = article.urlToImage;
     
-    console.log(title);
+    // console.log(title);
+
+    // $('#article_url').append(
+      // `<a href=${articleUrl}>`'</a>'
+    // );
+
+    $('#article_image').append(
+      `<img src=${imageUrl}`
+      );
+
     $('#news_articles').append(
       '<li class=title>'+ title +'</li>'
-      );
-    // $('#news_articles').text(title);
-
+      + '<ul class=source>' + source + '</ul>'
+      + '<ul class=source>' + published + '</ul>'
+      + '<ul class=description>' + description + '</ul>'
+      // + '<ul class=link>' +  + '</ul>'
+    );
   }
 };
 

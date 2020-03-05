@@ -60,3 +60,4 @@ GETTING JSON INFORMATON
 >>> req = requests.get('https://fakeapi.code/search', params=payload)
 >>> print(req.url)
 https://fakeapi.code/search?term=wow+very+long&filter=very+long&user=whoa+dudette
+

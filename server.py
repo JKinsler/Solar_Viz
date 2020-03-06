@@ -12,7 +12,7 @@ from query import (get_production_by_year, format_production_for_table,
                    format_production_for_chartjs, get_production_years, 
                    get_production_for_year, get_consumption_from_year,
                    get_percent_solar_by_year, all_utilities_production_for_a_year, 
-                   get_utilities_consumption_in_year)
+                   get_utilities_consumption_in_year, get_production_change)
 from news import (get_google_news, create_search_url, parse_google_news_response)
 
 
@@ -91,13 +91,15 @@ def show_year(year):
         consumption = consumption
     else:
         consumption = 0
-    percent = get_percent_solar_by_year(year)
+    percent_production = get_percent_solar_by_year(year)
+    change_factor = get_production_change(year)
 
 
     return render_template("year.html",  year = year,\
                             production = production, \
                             consumption = consumption, \
-                            percent = percent)
+                            percent_production = percent_production, \
+                            change_factor = change_factor)
 
 
 @app.route("/data_viz/<int:year>/compare_companies")

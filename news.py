@@ -41,6 +41,7 @@ def create_search_url():
         "q":"solar+energy+utility",
         "from":"2020-03-02",
         "sortBy":"popularity",
+        "pageSize":100,
         "apiKey": os.environ['GOOGLE_NEWS_KEY']
     }
 

@@ -226,20 +226,29 @@ def get_production_for_year(year):
         return None
 
 
-def get_production_percent_change(year):
-    """Return the % change in production since the previous year
+def get_production_change(year):
+    """Return the factor of change in production since the previous year
 
     Input: Year can be entered as an int or string
-    Output: percent_change will be a float with two decimal points
-
-    CODE DOES NOT OUTPUT WHAT I WANT IT TO. NEED TO FIX THE PERCENTAGES"""
+    Output: change factor will be a float with one decimal place
+    """
     
     year = int(year)
     previous_year = year - 1
-    print(previous_year)
-    percent_change = round((get_production_for_year(year)/get_production_for_year(previous_year)*100), 2)
-    print(percent_change)
-    return percent_change
+    year_production = get_production_for_year(year)
+    print(year_production)
+    previous_year_production = get_production_for_year(previous_year)
+    print(previous_year_production)
+    
+    if previous_year_production:
+        change_factor = round((year_production/previous_year_production), 1)
+        print(change_factor)
+        change_factor = str(change_factor) + " X"
+    
+        return change_factor
+
+    else:
+        return 'cannot be calculated'
 
 
 def get_consumption_values():
@@ -387,6 +396,7 @@ def get_percent_solar_by_year(year):
     
     else:
         return 0
+
 
 def get_company(search_company_name):
     """Return the object of a company which is given as an argument.

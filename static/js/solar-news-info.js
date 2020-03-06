@@ -6,26 +6,28 @@ const showArticles = (articles) => {
     const source = article.source.name;
     const published = article.publishedAt;
     const description = article.description;
-    const articleUrl = articles.url;
+    const articleUrl = article.url;
     const imageUrl = article.urlToImage;
     
+    // console.log(articleUrl);
     // console.log(title);
 
-    // $('#article_url').append(
-      // `<a href=${articleUrl}>`'</a>'
+    $('#articles').append(`
+      <a href="${articleUrl}">
+        <div class="article">
+
+          <img class="article_image" src = "${imageUrl}">
+          <p class="news_articles_title">${title}</p>
+          <p class="news_articles_source">${description}</p>
+        </div>
+      </a>
+    `);
+    //   '<li class=title>'+ title +'</li>'
+    //   + '<ul class=source>' + source + '</ul>'
+    //   + '<ul class=source>' + published + '</ul>'
+    //   + '<ul class=description>' + description + '</ul>'
+    //   // + '<ul class=link>' +  + '</ul>'
     // );
-
-    $('#article_image').append(
-      `<img src=${imageUrl}`
-      );
-
-    $('#news_articles').append(
-      '<li class=title>'+ title +'</li>'
-      + '<ul class=source>' + source + '</ul>'
-      + '<ul class=source>' + published + '</ul>'
-      + '<ul class=description>' + description + '</ul>'
-      // + '<ul class=link>' +  + '</ul>'
-    );
   }
 };
 

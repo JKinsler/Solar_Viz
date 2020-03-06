@@ -339,11 +339,14 @@ def get_utilities_consumption_in_year(search_year):
 
     for utility in utilities:
         utility_consumption = get_consumption_for_utility_in_year(utility, search_year)
-        utilities_consumption_gWh = float(utility_consumption[0][0])/1000
-        consumption_values.append(utilities_consumption_gWh)
+        if utility_consumption != []:
+            utilities_consumption_gWh = float(utility_consumption[0][0])/1000
+            consumption_values.append(utilities_consumption_gWh)
+
+        else: 
+            consumption_values.append(0) 
 
     return utilities, consumption_values
-
 
 def get_consumption_from_year(input_year):
     """Return the energy consumption value from a particular year, which is 
@@ -355,6 +358,9 @@ def get_consumption_from_year(input_year):
 
     >>> get_consumption_from_year(2008)
     197699316.25
+    
+    CODE NOT WORKING
+
     """
 
     search_year = str(input_year) 
@@ -364,6 +370,8 @@ def get_consumption_from_year(input_year):
         if pair[0] == search_year:
             production = float(pair[1])/1000
             return production
+        # else: 
+        #     return 0
             
 
 def get_percent_solar_by_year(year):
@@ -373,10 +381,12 @@ def get_percent_solar_by_year(year):
     production = get_production_for_year(year)
     consumption = get_consumption_from_year(year)
 
-    percent_solar = round(float(production / consumption), 2)
-
-    return percent_solar
+    if consumption:
+        percent_solar = round(float(production / consumption), 2)
+        return percent_solar
     
+    else:
+        return 0
 
 def get_company(search_company_name):
     """Return the object of a company which is given as an argument.

@@ -2,6 +2,7 @@
 
 from model import Company, Program, Production, Consumption, connect_to_db, db
 from datetime import datetime
+from datetime import timedelta
 from sqlalchemy import extract, func
 import json
 
@@ -182,6 +183,8 @@ def format_production_for_chartjs():
     production_datasets = []
     yearly_labels = []
     for year in production_by_year:
+        # year_date = 
+        # year_end_date = 
         yearly_labels.append(convert_date_to_iso(str(int(year[0]))))
         
         yearly_dataset = {}

@@ -11,8 +11,8 @@ def get_oldest_article_date():
 
     # date = datetime.datetime.strptime(date, "%m/%d/%Y")
     today_date = datetime.date.today()
-    # last_week = today_date-TimeSpan(-7)
-    search_date = today_date.isoformat()
+    last_week = today_date-timedelta(days=2)
+    search_date = last_week.isoformat()
 
     return search_date
 
@@ -39,7 +39,7 @@ def create_search_url():
     
     payload = {
         "q":"solar+energy+utility",
-        "from":"2020-03-02",
+        "from":oldest_article,
         "sortBy":"popularity",
         "pageSize":100,
         "apiKey": os.environ['GOOGLE_NEWS_KEY']
@@ -127,8 +127,9 @@ def parse_google_news_response(news_results, i=0):
     return (title, source, published_time, description, article_url, image_url)
 
 
-search_url, payload = create_search_url()
-current_news = get_google_news(search_url, payload)
-for i in range(5):
-    title, source, published_time, description, article_url, image_url = parse_google_news_response(current_news, i)
-    print(f'Article {i+1}: {title}\n{source}\n{published_time}\n{description}\n{article_url}\n\n')
+# HELPFUL CODE FOR PYTHON DEBUGGING BELOW
+# search_url, payload = create_search_url()
+# current_news = get_google_news(search_url, payload)
+# for i in range(5):
+#     title, source, published_time, description, article_url, image_url = parse_google_news_response(current_news, i)
+#     print(f'Article {i+1}: {title}\n{source}\n{published_time}\n{description}\n{article_url}\n\n')

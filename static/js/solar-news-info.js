@@ -18,7 +18,9 @@ const showArticles = (articles) => {
 
           <img class="article_image" src = "${imageUrl}">
           <p class="news_articles_title">${title}</p>
-          <p class="news_articles_source">${description}</p>
+          <p class="news_articles_source">${source}</p>
+          <p class="news_articles_source">${published}</p>
+          <p class="news_articles_description">${description}</p>
         </div>
       </a>
     `);

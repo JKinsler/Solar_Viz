@@ -44,10 +44,8 @@
 
 <div>
   <h2>Want to know more?</h2>
-  <p>Click on a year to get more information</p>
-  <h4>Years available</h4>
-
-  <ul>
+<!--   <p>Click on a year to get more information</p> -->
+<!--   <ul>
     {% for year in years %}
       <li>
         <a href="/data_viz/{{ year }}">
@@ -55,7 +53,20 @@
         </a>
       </li>
     {% endfor %}
-  </ul>
+  </ul> -->
+  
+  <form id="year_selection" method="post" action="/data_viz">
+    <label>Select a year to get more information:</label>
+    <select name = year>
+      {% for year in years %}
+      <option>
+        {{ year }}
+      </option>
+    {% endfor %}
+      <!-- <option value="example">example text</option> -->
+    </select>
+    <button type="Submit">Submit</button>
+  </form>
   
 </div>
 

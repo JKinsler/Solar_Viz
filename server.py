@@ -53,7 +53,7 @@ def get_news_feed_info():
     return jsonify(news_results)
 
 
-@app.route("/data_viz")
+@app.route("/data_viz", methods=["GET"])
 def show_solar_details():
     """Show data vizualization details."""
 
@@ -64,6 +64,15 @@ def show_solar_details():
     return (render_template("data_viz.html",\
             production_by_year = production_by_year,\
             years = years))
+
+
+@app.route("/data_viz", methods=["POST"])
+def get_year():
+    """Get selected year from data_viz dropdown."""
+
+    selected_year = request.form.get("year")
+    
+    return redirect(f"/data_viz/{selected_year}")
 
 
 @app.route("/data_viz/all_production")

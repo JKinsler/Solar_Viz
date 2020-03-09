@@ -14,13 +14,16 @@ const showArticles = (articles) => {
 
     $('#articles').append(`
       <a href="${articleUrl}">
-        <div class="article">
-
-          <img class="article_image" src = "${imageUrl}">
-          <p class="news_articles_title">${title}</p>
-          <p class="news_articles_source">${source}</p>
-          <p class="news_articles_source">${published}</p>
-          <p class="news_articles_description">${description}</p>
+        <div class="row">
+          <section class="col-4">
+            <img class="img-thumbnail" src="${imageUrl}">
+          </section>
+          <section class="col-8">
+            <p class="news_articles_title">${title}</p>
+            <p class="news_articles_source">${source}</p>
+            <p class="news_articles_source">${published}</p>
+            <p class="news_articles_description">${description}</p>
+          </section>
         </div>
       </a>
     `);

@@ -61,7 +61,8 @@ def get_production_values():
 
 def get_production_by_year():
     """Return the solar production values by year
-    Output will be a dictionary with year: production as key value pairs.
+    
+    Output will be a list of years and production values in kWh
 
     used in server.py
 
@@ -124,7 +125,7 @@ def format_production_for_table():
     
     Output: dictionary
         - key types are 'int'
-        - value types are 'int'
+        - value types are 'int', kWh
    
     Used in server.py
 
@@ -224,7 +225,8 @@ def get_production_for_year(year):
     production_by_year_dict = format_production_for_table()
     
     if year_int in production_by_year_dict:
-        return production_by_year_dict[year_int]
+        production = float(production_by_year_dict[year_int])/1000
+        return production
     else:
         return None
 

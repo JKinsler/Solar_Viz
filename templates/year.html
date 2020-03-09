@@ -4,22 +4,26 @@
 
 {% block body %}
 
-<h1>Solar Viz</h1>
+<div class="container container-fluid">
+  <h1>Details for {{year}}</h1>
+</div>
 
-<h2>Solar energy production details for {{year}}:</h2>
+<div class="container container-fluid">
+  <h4>Description of the data</h4>
+  <p>Description goes here</p>
+</div>
 
-<div id="production-consumption" data-year="{{ year }}">
-    <p>REPLACE TABLE WITH A PIE CHART?</p>
-    <table class="showing_solar_data" id="PCC">
-        <tr>
+<div class="container container-fluid" id="production-consumption" data-year="{{ year }}">
+    <table class="table" id="PCC">
+        <thead class="thead-light">
           <th>
-              production (gWh)
+              Solar Energy Production (gWh)
           </th>
           <th>
-              consumption (gWh)
+              Total Energy Production (gWh)
           </th>
           <th>
-              &#37 solar
+              &#37 Energy that is Solar
           </th>
         </tr>
         <tr>
@@ -34,13 +38,17 @@
           </td>
         </tr>
     </table>
-    <p>Solar Energy Production changed by {{ change_factor }} from the previous year. </p>
+    <p>Solar energy generation changed by {{ change_factor }} from the previous year. </p>
 </div>
 
-<div id="site content">
+<div class="container container-fluid">
+  <h4>Description of the data</h4>
+  <p>Description goes here</p>
+</div>
+
+<div class="container container-fluid" id="site content">
   <p>Solar production values from all CSI companies for {{year}}:</p>
   <canvas id="bar-chart-compare-companies2"></canvas>
-  <!-- <h4>Congratulations Johanna on getting Chart.js to work again!!!</h4> -->
 </div>
 
 {% endblock %}

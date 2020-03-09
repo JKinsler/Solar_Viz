@@ -6,10 +6,7 @@
 
 {% block body %}
 
-<h2>Solar Data Vizualization</h2>
-  <p><a href="/">go to the home page</a></p>
-
-<h2>Yearly Production Data for All Utilities - Jinja</h2> 
+<!-- <h2>Yearly Production Data for All Utilities - Jinja</h2> 
   <p>Showing table data that was implemented with Jinja</p>
   <table class="showing_solar_data" id="YPT">
     <tr>
@@ -30,30 +27,30 @@
       </td>
     </tr>
     {% endfor %}
-  </table>
+  </table> -->
 
-<h4>Congratulations Johanna on completing your MVP!</h4>
+<!-- <h4>Congratulations Johanna on completing your MVP!</h4> -->
 
-<h2>Yearly Production Data for All Utilities - chart.js</h2>
+<div class="container container-fluid">
+  <h1>Annual Solar Energy Generation</h1>
+  <h4>Description of the data:</h4>
+  <p>Add description here</p>
 
-<div id="site content">
-  <p>Practicing a bar chart with dates in Chart.js</p>
-  <canvas id="bar-chart2"></canvas>
-  <h4>Congratulations Johanna on getting Chart.js to work!!!</h4>
-</div>
+  <div id="site content">
+    <canvas id="bar-chart2"></canvas>
+  </div>
 
-<div>
-  <h2>Want to know more?</h2>
-<!--   <p>Click on a year to get more information</p> -->
-<!--   <ul>
-    {% for year in years %}
-      <li>
-        <a href="/data_viz/{{ year }}">
-          {{ year }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul> -->
+  <h4>Want to know more?</h4>
+  <!--   <p>Click on a year to get more information</p> -->
+  <!--   <ul>
+      {% for year in years %}
+        <li>
+          <a href="/data_viz/{{ year }}">
+            {{ year }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul> -->
   
   <form id="year_selection" method="post" action="/data_viz">
     <label>Select a year to get more information:</label>
@@ -67,8 +64,8 @@
     </select>
     <button type="Submit">Submit</button>
   </form>
-  
 </div>
+
 
 {% endblock %}
 

@@ -1,13 +1,32 @@
 {% extends 'base.html' %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<link
+      href="../static/css/homepage.css"
+      rel="stylesheet"
+    >
+{% endblock %}
 
 {% block body %}
 
-<h2>Energy from the Sun</h2>
+<!-- <div class="container container-fluid">
+<h1>Energy from the Sun</h1>
+</div> -->
 
-<p><a href="/data_viz">View solar production data</a></p>
-<p><a href="/solar_news">View news about solar energy</a></p>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+
+        <!-- <img src="/static/images/GettyImages-871613394.jpg"> -->
+
+        <h1>SolarViz</h1>
+
+        <p class="lead">energy from the sun</p>
+
+    </div>
+   <!--  <div class="container">
+    </div> -->
+</div>
+
 
 {% endblock %}
 

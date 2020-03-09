@@ -95,11 +95,14 @@ def show_year(year):
 
     #information for table
     production = get_production_for_year(year)
+    production = '{:,.0f}'.format(production)
+    
     consumption = get_consumption_from_year(year)
     if consumption != None:
-        consumption = consumption
+        consumption = '{:,.0f}'.format(consumption)
     else:
         consumption = 0
+    
     percent_production = get_percent_solar_by_year(year)
     change_factor = get_production_change(year)
 

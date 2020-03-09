@@ -23,6 +23,7 @@ const showArticles = (articles) => {
             <p class="news_articles_source">${source}</p>
             <p class="news_articles_source">${published}</p>
             <p class="news_articles_description">${description}</p>
+            <p> read more </p>
           </section>
         </div>
       </a>

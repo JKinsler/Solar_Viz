@@ -35,10 +35,8 @@
   <h1>Annual Solar Energy Generation</h1>
   <br>
   <h4>About the data</h4>
-  <p>Solar energy capacity has been increasingly added to the California energy grid since the early 2000s. 
-  <br>  
   <br>
-  The State of California tracks the progress of renewable energy by growth through the California Solar Initiative. In this program, the State partners with energy utilities to track solar energy production data. Gnergy generation data was tracked for several years by three companies. This data is called the 'CSI working dataset'. This page shows CSI participation from three of California's large energy utilities: 
+  The State of California tracks the growth of solar energy generation through the California Solar Initiative (CSI). In this program, the State partners with energy utilities to gather data on solar energy production. This data is called the 'CSI working dataset'. This page shows CSI participation from three of California's large energy utilities: 
     <a href="https://www.pge.com/">Pacific Gas and Electric</a>,
     <a href="https://www.sdge.com/">San Diego Gas and Electric</a> and,
     <a href="https://www.sce.com/">Southern California Edison</a>.
@@ -46,9 +44,11 @@
 
   <div id="site content">
     <br>
-    <h4>Annual solar energy generation, from california CSI dataset</h4>
+    <h4>Annual solar energy generation, from California CSI dataset</h4>
     <canvas id="bar-chart2"></canvas>
-    <p>The chart above shows the combined solar energy production from CSI's participating utilties. The downward trend after 2016 might be accounted for my the end of the CSI funding cycle, and therefore, the end of data reporting.</p>
+    <p>The chart above shows the combined solar energy production from CSI's participating utilties. The downward trend after 2016 might be accounted for by the end of reporting on specific projects. Actual solar capacity in California has not declined. Visit the 
+      <a href="https://ww2.energy.ca.gov/almanac/renewables_data/solar/index_cms.php#pvThermal">California Solar Energy Statistics and Data</a>,
+    to learn more about current solar energy production.</p>
   </div>
   <br>
   <h4>Want to know more?</h4>
@@ -64,7 +64,7 @@
     </ul> -->
   
   <form id="year_selection" method="post" action="/data_viz">
-    <label>Select a year:</label>
+    <label>See datails for a specific year:</label>
     <select name = year>
       {% for year in years %}
       <option>
@@ -76,8 +76,8 @@
     <button type="Submit">Submit</button>
   </form>
   <br>
-  <p>For those who are really curious, see the raw data on the
-    <a href="https://www.californiadgstats.ca.gov/downloads/">California CSI website.</a>
+  <p>For those who are really curious, check out the
+    <a href="https://www.californiadgstats.ca.gov/downloads/">California CSI raw data.</a>
   </p>
   <br>
   <br>

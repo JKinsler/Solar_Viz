@@ -1,5 +1,8 @@
 /* site-wrapper and site-wrapper-inner are to vertically center content using
    table/table-cell vertical centering. */
+html {
+    height: 100%;
+}
 
 body {
     background: #333 url("/static/images/mariana-proenca-unsplash.jpg");
@@ -7,6 +10,7 @@ body {
     background-repeat: no-repeat;
     color:  black;
     text-align: center;
+    height: 75%;
 }
 
 
@@ -18,13 +22,15 @@ body {
 
 .site-wrapper-inner {
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .photo-credit{
     color: white;
     display: table-cell;
-    vertical-align: bottom;
+    vertical-align: 75%;
+/*    text-align: right !important;*/
+    /*margin-bottom: 200px;*/
 }
 
 /*.panel-transparent {

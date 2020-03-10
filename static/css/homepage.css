@@ -4,8 +4,8 @@
 body {
     background: #333 url("/static/images/GettyImages-871613394.jpg");
     background-size: cover;
-
-    color: white;
+    background-repeat: no-repeat;
+    color:  black;
     text-align: center;
 }
 
@@ -21,10 +21,22 @@ body {
     vertical-align: middle;
 }
 
-/* The footer always appears at the bottom of the browser window. */
+.panel-transparent {
+        background: none;
+}
 
+.panel-transparent .panel-heading{
+    background: rgba(122, 130, 136, 0.2)!important;
+}
+
+.panel-transparent .panel-body{
+    background: rgba(46, 51, 56, 0.2)!important;
+}
+
+/* The footer always appears at the bottom of the browser window. */
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;  /* required because fixed position */
+    color: white;
 }

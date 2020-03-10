@@ -33,11 +33,19 @@
 
 <div class="container container-fluid">
   <h1>Annual Solar Energy Generation</h1>
-  <h4>Description of the data:</h4>
-  <p>Add description here</p>
+  <h4>About the data</h4>
+  <p>Solar energy capacity has been increasingly added to the California energy grid since the early 2000s. 
+  <br>  
+  <br>
+  The State of California promoted the growth of renewable energy by forming partnerships and providing funding for eligible solar utility construction projects. After completion of the construction, energy generation data was tracked for several years on these projects. The dataset that resulted is called the 'CSI working dataset'. This page shows CSI participation from three of California's large energy utilities: 
+    <a href="https://www.pge.com/">Pacific Gas and Electric</a>,
+    <a href="https://www.sdge.com/">San Diego Gas and Electric</a> and,
+    <a href="https://www.sce.com/">Southern California Edison</a>.
+  </p>
 
   <div id="site content">
     <canvas id="bar-chart2"></canvas>
+    <p>The chart above shows the combined solar energy production from CSI's participating utilties. The downward trend after 2016 might be accounted for my the end of the CSI funding cycle, and therefore, the end of data reporting.</p>
   </div>
 
   <h4>Want to know more?</h4>
@@ -53,7 +61,7 @@
     </ul> -->
   
   <form id="year_selection" method="post" action="/data_viz">
-    <label>Select a year to get more information:</label>
+    <label>Select a year:</label>
     <select name = year>
       {% for year in years %}
       <option>
@@ -64,9 +72,10 @@
     </select>
     <button type="Submit">Submit</button>
   </form>
+  <p>For those who are really curious, see the raw data on the
+    <a href="https://www.californiadgstats.ca.gov/downloads/">California CSI website.</a>
+  </p>
 </div>
-<span class="border-bottom"></span>
-
 
 {% endblock %}
 

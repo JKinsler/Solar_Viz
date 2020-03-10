@@ -2,7 +2,7 @@
    table/table-cell vertical centering. */
 
 body {
-    background: #333 url("/static/images/GettyImages-871613394.jpg");
+    background: #333 url("/static/images/mariana-proenca-unsplash.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     color:  black;
@@ -21,7 +21,13 @@ body {
     vertical-align: middle;
 }
 
-.panel-transparent {
+.photo-credit{
+    color: white;
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+/*.panel-transparent {
         background: none;
 }
 
@@ -31,7 +37,7 @@ body {
 
 .panel-transparent .panel-body{
     background: rgba(46, 51, 56, 0.2)!important;
-}
+}*/
 
 /* The footer always appears at the bottom of the browser window. */
 footer {
@@ -39,4 +45,6 @@ footer {
     bottom: 0;
     width: 100%;  /* required because fixed position */
     color: white;
+    left:0;
+    background: #696969;
 }

@@ -396,8 +396,8 @@ def get_percent_solar_by_year(year):
     consumption = get_consumption_from_year(year)
 
     if consumption:
-        percent_solar = round(float(production / consumption), 2)
-        return percent_solar
+        percent_solar = round(float(production / consumption), 3)
+        return percent_solar*100
     
     else:
         return 0

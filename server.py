@@ -104,6 +104,8 @@ def show_year(year):
         consumption = 0
     
     percent_production = get_percent_solar_by_year(year)
+    percent_production = '{:,.2f}'.format(percent_production)
+
     change_factor = get_production_change(year)
 
 

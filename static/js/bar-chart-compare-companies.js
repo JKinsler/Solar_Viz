@@ -28,7 +28,7 @@ $.get(`/data_viz/${year}/compare_companies`, (res) => {
             data: production_data_list
           },
           {
-            label: 'Total energy production/consumption (gWh)',
+            label: 'Total energy consumption (gWh)',
             data: consumption_data_list
           }
         ]

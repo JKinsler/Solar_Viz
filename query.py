@@ -190,7 +190,7 @@ def format_production_for_chartjs():
         
         yearly_dataset = {}
         yearly_dataset["x"] = convert_date_to_iso(str(int(year[0])))
-        yearly_dataset["y"] = float(year[1]/1000)
+        yearly_dataset["y"] = float(year[1]/1000000)
         production_datasets.append(yearly_dataset)
 
     # yearly_labels_json = json.dumps(yearly_labels)
@@ -225,7 +225,7 @@ def get_production_for_year(year):
     production_by_year_dict = format_production_for_table()
     
     if year_int in production_by_year_dict:
-        production = float(production_by_year_dict[year_int])/1000
+        production = float(production_by_year_dict[year_int])/1000000
         return production
     else:
         return None
@@ -354,7 +354,7 @@ def get_utilities_consumption_in_year(search_year):
     for utility in utilities:
         utility_consumption = get_consumption_for_utility_in_year(utility, search_year)
         if utility_consumption != []:
-            utilities_consumption_gWh = float(utility_consumption[0][0])/1000
+            utilities_consumption_gWh = float(utility_consumption[0][0])/1000000
             consumption_values.append(utilities_consumption_gWh)
 
         else: 
@@ -382,7 +382,7 @@ def get_consumption_from_year(input_year):
 
     for pair in all_consumption:
         if pair[0] == search_year:
-            production = float(pair[1])/1000
+            production = float(pair[1])/1000000
             return production
         # else: 
         #     return 0
@@ -564,7 +564,7 @@ def utility_production_for_a_year(utility, search_year):
 
     for year in years:
         if search_year == year[0]:
-            return float(year[1]/1000)
+            return float(year[1]/1000000)
 
 def all_utilities_production_for_a_year(year):
     """Returns a list of production values that correspond with the utilities in a year.

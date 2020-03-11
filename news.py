@@ -40,7 +40,7 @@ def create_search_url():
     payload = {
         "q":"solar+energy+utility",
         "from":oldest_article,
-        "sortBy":"popularity",
+        "sortBy":"relevancy",
         "pageSize":100,
         "apiKey": os.environ['GOOGLE_NEWS_KEY']
     }

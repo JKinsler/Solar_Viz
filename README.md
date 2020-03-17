@@ -49,11 +49,11 @@ Install dependencies:
 $ pip install -r requirements.txt
 ```
 Get a Google News API key:
-![api](https://newsapi.org/s/google-news-api)
+<a href="https://newsapi.org/s/google-news-api"> Google News API </a>
 <br>
 Create a file called **secrets.sh** add your Google News API key there. An example of secrets.sh looks like this: <br> 
 export GOOGLE_NEWS_KEY="XXXXXXXXXXXX"
-<br>
+<br><br>
 Source the API key:
 ```
 $ source secrets.sh
@@ -71,3 +71,7 @@ Run the app from the command line:
 $ python3 server.py
 ```
 <br><br>
+## <a name="features"></a>Features
+
+![Homepage](https://raw.githubusercontent.com/JKinsler/Solar_Viz/static/images/franck-v-DqpPwAC3QVY.jpg)
+<br>

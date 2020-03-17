@@ -35,7 +35,7 @@ The following must be installed to run SolarViz:
 
 ### Run SolarViz on your local computer
 
-Clone or fork repository:
+Clone repository:
 ```
 $ git clone https://github.com/JKinsler/Solar_Viz.git
 ```
@@ -52,7 +52,7 @@ Get a Google News API key:
 <a href="https://newsapi.org/s/google-news-api"> Google News API </a>
 <br>
 Create a file called **secrets.sh** add your Google News API key there. An example of secrets.sh looks like this: <br> 
-export GOOGLE_NEWS_KEY="XXXXXXXXXXXX"
+<img src="static/images/API_key_example.PNG" width="300">
 <br><br>
 Source the API key:
 ```
@@ -73,17 +73,21 @@ $ python3 server.py
 <br><br>
 ## <a name="features"></a>Features
 
-<!-- ![Homepage]<img src="/static/images/Homepage.png" width="200"> -->
 #### Homepage
+<img src="static/images/Homepage.PNG" width="500">
 <br>
 
 #### Data
+<img src="static/images/Data.PNG" width="500">
 
 To see more information on a particular year, users can select 'year' from the drop-down menu and click 'Submit.'
 
 #### Year
+<img src="static/images/Year.PNG" width="500">
+
 
 #### News
+<img src="static/images/News.PNG" width="500">
 
 ## <a name="futurefeatures"></a>Features for Version 2.0
 
@@ -93,4 +97,4 @@ To see more information on a particular year, users can select 'year' from the d
 
 ## <a name="aboutme"></a>About the Developer
 
-SolarViz creator Johanna Kinsler is a former automotive engineer turned software engineer. Johanna made SolarViz so she could practice her full stack software engineering skills while also becoming more knowledgable about data visualization and renewable energy. She can be found on [LinkedIn](https://www.linkedin.com/in/johanna-kinsler-76562463/) and on [Github](https://github.com/JKinsler).
+SolarViz creator Johanna Kinsler is a former automotive engineer turned software engineer. Johanna made SolarViz to practice her full stack software engineering skills and also learn more about data visualization and renewable energy. She can be found on [LinkedIn](https://www.linkedin.com/in/johanna-kinsler-76562463/) and on [Github](https://github.com/JKinsler).

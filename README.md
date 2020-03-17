@@ -71,7 +71,6 @@ $ psql solar_viz < solar_viz.sql
 ```
 $ python3 -i seed.py
 ```
-<br><br>
 Run the app from the command line:
 ```
 $ python3 server.py
@@ -96,7 +95,7 @@ More details are shown about the year that the user selected. There are addition
 
 
 #### News
-Popular articles about solar energy news and utilities are shown here. Users can click the article to go to the original news source.
+Popular articles about solar energy news and utilities are shown here. Users can click any article to go to the original news source.
 <img src="static/images/News.PNG" width="700">
 
 ## <a name="futurefeatures"></a>Features for Version 2.0

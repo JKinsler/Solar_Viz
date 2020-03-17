@@ -17,7 +17,8 @@ This project was made at Hackbright Academy in San Francisco over four weeks in 
 
 ## <a name="techstack"></a>Technologies
 
-Tech Stack: Python, PostreSQL, SqlAlchemy, Flask, Python .csv library, HTML, JavaScript, asynchronous JavaScript (Ajax ), bootstrap, css, Chart.js, unittest <br>
+Tech Stack: Python, PostreSQL, SqlAlchemy, Flask, Python .csv library, HTML, JavaScript, asynchronous JavaScript (Ajax ), bootstrap, css, Chart.js, unittest 
+<br><br>
 APIs: Google News
 
 ## <a name="installation"></a>Installation
@@ -64,10 +65,12 @@ Create a database called 'solar_viz':
 ```
 $ createdb solar_viz
 ```
-Run **seed.py** interactively in the terminal. This will create the database tables and populate them. Be prepared to wait up to 45minutes for this file to run.
+Run **seed.py** interactively in the terminal. This will create the database tables and populate them. Be prepared to wait up to 45minutes for this file to run. 
 ```
 $ python3 -i seed.py
 ```
+(Alternatively, you can import the tables and data using **solar_viz.sql**)
+<br><br>
 Run the app from the command line:
 ```
 $ python3 server.py
@@ -76,20 +79,20 @@ $ python3 server.py
 ## <a name="features"></a>Features
 
 #### Homepage
-<img src="static/images/Homepage.PNG" width="600">
+<img src="static/images/Homepage.PNG" width="700">
 <br>
 
 #### Data
-<img src="static/images/Data.PNG" width="600">
+<img src="static/images/Data.PNG" width="700">
 
 To see more information on a particular year, users can select 'year' from the drop-down menu and click 'Submit.'
 
 #### Year
-<img src="static/images/Year.PNG" width="600">
+<img src="static/images/Year.PNG" width="700">
 
 
 #### News
-<img src="static/images/News.PNG" width="600">
+<img src="static/images/News.PNG" width="700">
 
 ## <a name="futurefeatures"></a>Features for Version 2.0
 

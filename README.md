@@ -39,7 +39,7 @@ Clone or fork repository:
 ```
 $ git clone https://github.com/JKinsler/Solar_Viz.git
 ```
-Create and activate a virtual environment inside your travelmaps directory:
+Create and activate a virtual environment inside your SolarViz directory:
 ```
 $ virtualenv env --always-copy
 $ source env/bin/activate
@@ -73,5 +73,24 @@ $ python3 server.py
 <br><br>
 ## <a name="features"></a>Features
 
-![Homepage]<img src="/static/images/Homepage.png" width="200">
+<!-- ![Homepage]<img src="/static/images/Homepage.png" width="200"> -->
+#### Homepage
 <br>
+
+#### Data
+
+To see more information on a particular year, users can select 'year' from the drop-down menu and click 'Submit.'
+
+#### Year
+
+#### News
+
+## <a name="futurefeatures"></a>Features for Version 2.0
+
+* Automatically update the raw data files so they stay current with the latest version available from the California Solar Initiative.
+* In the 'Data' route, allow users to filter production data for a particular time period. E.g. user could select Dec 2007 to Jan 2008 and see production for that time period.
+* In the 'Year' route, enable users to download the production and consumption totals as an excel file.
+
+## <a name="aboutme"></a>About the Developer
+
+SolarViz creator Johanna Kinsler is a former automotive engineer turned software engineer. Johanna made SolarViz so she could practice her full stack software engineering skills while also becoming more knowledgable about data visualization and renewable energy. She can be found on [LinkedIn](https://www.linkedin.com/in/johanna-kinsler-76562463/) and on [Github](https://github.com/JKinsler).

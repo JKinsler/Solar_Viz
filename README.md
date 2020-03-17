@@ -73,5 +73,5 @@ $ python3 server.py
 <br><br>
 ## <a name="features"></a>Features
 
-![Homepage](https://raw.githubusercontent.com/JKinsler/Solar_Viz/static/images/franck-v-DqpPwAC3QVY.jpg)
+![Homepage]<img src="images/Homepage.png" width="200">
 <br>

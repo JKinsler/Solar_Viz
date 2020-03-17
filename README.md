@@ -54,7 +54,7 @@ Get a Google News API key:
 <a href="https://newsapi.org/s/google-news-api"> Google News API </a>
 <br><br>
 Create a file called **secrets.sh** and add your Google News API key there: <br> 
-<img src="static/images/API_key_example.PNG" width="300">
+<img src="static/images/API_key_example.PNG" width="500">
 <br><br>
 Source the API key:
 ```
@@ -76,27 +76,27 @@ $ python3 server.py
 ## <a name="features"></a>Features
 
 #### Homepage
-<img src="static/images/Homepage.PNG" width="500">
+<img src="static/images/Homepage.PNG" width="600">
 <br>
 
 #### Data
-<img src="static/images/Data.PNG" width="500">
+<img src="static/images/Data.PNG" width="600">
 
 To see more information on a particular year, users can select 'year' from the drop-down menu and click 'Submit.'
 
 #### Year
-<img src="static/images/Year.PNG" width="500">
+<img src="static/images/Year.PNG" width="600">
 
 
 #### News
-<img src="static/images/News.PNG" width="500">
+<img src="static/images/News.PNG" width="600">
 
 ## <a name="futurefeatures"></a>Features for Version 2.0
 
 * Automatically update the raw data files so they stay current with the latest version available from the California Solar Initiative.
 * In the 'Data' route, allow users to filter production data for a particular time period. E.g. user could select Dec 2007 to Jan 2008 and see production for that time period.
 * In the 'Year' route, enable users to download the production and consumption totals as an excel file.
-* Enable users to see which cities in California product the most solar energy by overlaying solar energy generation values on a map using D3. 
+* Enable users to see which cities in California produce the most solar energy by overlaying solar energy generation values on a map using D3. 
 
 ## <a name="aboutme"></a>About the Developer
 

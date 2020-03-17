@@ -29,8 +29,6 @@ The following must be installed to run SolarViz:
 
 - Python3
 - PostgreSQL
-- Flask
-- Jinja
 
 - API key for GoogleNews
 
@@ -65,11 +63,14 @@ Create a database called 'solar_viz':
 ```
 $ createdb solar_viz
 ```
-Run **seed.py** interactively in the terminal. This will create the database tables and populate them. Be prepared to wait up to 45minutes for this file to run. 
+Import the tables and data using **solar_viz.sql**:
+```
+$ psql solar_viz < solar_viz.sql
+```
+(Alternatively, you can run **seed.py** interactively in the terminal. This will create the database tables and populate them. Be prepared to wait up to 45minutes for this file to run) 
 ```
 $ python3 -i seed.py
 ```
-(Alternatively, you can import the tables and data using **solar_viz.sql**)
 <br><br>
 Run the app from the command line:
 ```
@@ -79,19 +80,23 @@ $ python3 server.py
 ## <a name="features"></a>Features
 
 #### Homepage
+The landing page includes a brief description of the app and links to the features. 
 <img src="static/images/Homepage.PNG" width="700">
 <br>
 
 #### Data
+Users are shown a graphical representation of solar energy production by year.
 <img src="static/images/Data.PNG" width="700">
 
 To see more information on a particular year, users can select 'year' from the drop-down menu and click 'Submit.'
 
 #### Year
+More details are shown about the year that the user selected. There are additional graphical representations of solar energy production, but this time the information is grouped by utility company.
 <img src="static/images/Year.PNG" width="700">
 
 
 #### News
+Popular articles about solar energy news and utilities are shown here. Users can click the article to go to the original news source.
 <img src="static/images/News.PNG" width="700">
 
 ## <a name="futurefeatures"></a>Features for Version 2.0

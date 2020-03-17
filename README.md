@@ -95,7 +95,7 @@ More details are shown about the year that the user selected. There are addition
 
 
 #### News
-Popular articles about solar energy news and utilities are shown here. Users can click any article to go to the original news source.
+Popular articles about solar energy news and utilities are shown here. Users can click any article to go to the original news source.<br>
 <img src="static/images/News.PNG" width="700">
 
 ## <a name="futurefeatures"></a>Features for Version 2.0

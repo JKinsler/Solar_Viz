@@ -73,5 +73,5 @@ $ python3 server.py
 <br><br>
 ## <a name="features"></a>Features
 
-![Homepage]<img src="images/Homepage.png" width="200">
+![Homepage]<img src="/static/images/Homepage.png" width="200">
 <br>

@@ -1,6 +1,6 @@
 # SolarViz
 
-SolarViz is a full stack web application that informs users about solar energy production and news.
+SolarViz is a full stack web application that informs users about solar energy production and news. <a href="http://34.214.50.218/"> Follow this link </a> to the deployed site.
 
 SolarViz has a custom web interface that displays data from the California Solar Initiative, which is an energy tracking and incentive program run by the state. The site contains dynamically generated graphs that users can review to understand broad trends in solar energy production. Users can select filters on the larger data set to see specific information from years and companies. 
 

@@ -67,7 +67,7 @@ Import the tables and data using **solar_viz.sql**:
 ```
 $ psql solar_viz < solar_viz.sql
 ```
-(Alternatively, you can run **seed.py** interactively in the terminal. This will create the database tables and populate them. Be prepared to wait up to 45minutes for this file to run) 
+(Alternatively, you can run **seed.py** interactively in the terminal. This will create the database tables and populate them. Be prepared to wait up to 45minutes for this file to run.) 
 ```
 $ python3 -i seed.py
 ```

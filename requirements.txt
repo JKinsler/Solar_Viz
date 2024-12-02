@@ -14,4 +14,4 @@ psycopg2-binary==2.7.5
 requests==2.23.0
 SQLAlchemy==1.2.8
 urllib3==1.25.8
-Werkzeug==0.14.1
+Werkzeug==0.15.3
